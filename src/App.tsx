@@ -6,7 +6,8 @@ import './App.css';
 function App() {
 
   useEffect(() => {
-    const queryUrl = "https://composed-falcon-273907.ey.r.appspot.com/backend/message"
+    const myUrl = window.location.href;
+    const queryUrl = `${myUrl}backend/message`
     axios.get(queryUrl)
         .then(data => console.log(data))
         .catch(err => console.log(err));
