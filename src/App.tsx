@@ -1,37 +1,43 @@
-import React, { useEffect } from 'react';
+import React, {useEffect, useState} from 'react';
 import axios from 'axios';
-import logo from './logo.svg';
 import './App.css';
+import ItemList from "./components/ItemList";
+
 
 function App() {
 
-  useEffect(() => {
-    const myUrl = window.location.href;
-    const queryUrl = `${myUrl}backend/message`
-    axios.get(queryUrl)
-        .then(data => console.log(data))
-        .catch(err => console.log(err));
-  } )
+    const [items, setItems] = useState(["a", "b", "c"]);
+    const [newItem, setNewItem] = useState("");
 
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-          lolnoob
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    useEffect(() => {
+        const myUrl = window.location.href;
+        const queryUrl = `${myUrl}backend/message`
+        axios.get(queryUrl)
+            .then(data => console.log(data))
+            .catch(err => console.log(err));
+    })
+
+    function addItem(foo: any) {
+        foo.preventDefault();
+        setItems([...items, newItem]);
+        setNewItem("");
+    }
+
+    function handleChange(event: any) {
+        setNewItem(event.target.value)
+    }
+
+    return (
+        <div>
+            <ItemList items={items}/>
+            <form onSubmit={addItem}>
+                <input type="text" value={newItem} onChange={handleChange} />
+                <button>
+                    submit
+                </button>
+            </form>
+        </div>
+    );
 }
 
 export default App;
