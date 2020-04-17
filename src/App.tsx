@@ -11,7 +11,7 @@ function App() {
 
     useEffect(() => {
         const myUrl = window.location.href;
-        const queryUrl = `${myUrl}backend/message`
+        const queryUrl = `${myUrl}backend/items`
         axios.get(queryUrl)
             .then(data => console.log(data))
             .catch(err => console.log(err));
@@ -20,6 +20,18 @@ function App() {
     function addItem(foo: any) {
         foo.preventDefault();
         setItems([...items, newItem]);
+
+        const myUrl = window.location.href;
+        const postUrl = `${myUrl}backend/items`
+        const newItemObj = {
+            userId: "myUserId",
+            groupId: "myGroupId",
+            messageId: "myMessageId",
+            text: newItem
+        }
+        axios.post(postUrl, newItemObj)
+            .then(data => console.log(data))
+            .catch(err => console.log(err));
         setNewItem("");
     }
 
