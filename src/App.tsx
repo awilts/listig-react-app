@@ -10,11 +10,23 @@ function App() {
     const [newItem, setNewItem] = useState("");
 
     useEffect(() => {
-        const myUrl = window.location.href;
-        const queryUrl = `${myUrl}backend/items`
-        axios.get(queryUrl)
-            .then(data => console.log(data))
-            .catch(err => console.log(err));
+        const myHostname = window.location.hostname;
+
+
+        // console.log({myHostname});
+        // const socket = new WebSocket(`ws://${myHostname}:3000/ws/items`);
+        const socket = new WebSocket(`ws://localhost:8080/ws/items`);
+        socket.addEventListener('message', async (event: any) => {
+            const profile = JSON.parse(event.data);
+            console.log("got something via WS");
+            console.log(profile);
+        });
+
+
+        // const queryUrl = `${myUrl}backend/items`
+        // axios.get(queryUrl)
+        //     .then(data => console.log(data))
+        //     .catch(err => console.log(err));
     })
 
     function addItem(foo: any) {
@@ -26,11 +38,14 @@ function App() {
         const newItemObj = {
             userId: "myUserId",
             groupId: "myGroupId",
-            messageId: "myMessageId",
             text: newItem
         }
         axios.post(postUrl, newItemObj)
-            .then(data => console.log(data))
+            .then(data => {
+                    console.log("sent something..")
+                    console.log(data)
+                }
+            )
             .catch(err => console.log(err));
         setNewItem("");
     }
@@ -43,7 +58,7 @@ function App() {
         <div>
             <ItemList items={items}/>
             <form onSubmit={addItem}>
-                <input type="text" value={newItem} onChange={handleChange} />
+                <input type="text" value={newItem} onChange={handleChange}/>
                 <button>
                     submit
                 </button>

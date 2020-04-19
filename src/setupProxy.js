@@ -1,6 +1,6 @@
-const { createProxyMiddleware } = require('http-proxy-middleware');
+const {createProxyMiddleware} = require('http-proxy-middleware');
 
-module.exports = function(app) {
+module.exports = function (app) {
     const conf = require('./devlocal').conf;
     app.use(
         '/backend',
@@ -10,4 +10,13 @@ module.exports = function(app) {
             },
         ),
     );
+    // app.use(
+    //     "/ws",
+    //     createProxyMiddleware({
+    //             target: conf.proxy,
+    //             ws: true,
+    //             changeOrigin: true
+    //         }
+    //     )
+    // );
 };
