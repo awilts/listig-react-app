@@ -3,16 +3,16 @@ import {Dispatch} from "redux";
 
 export type RECEIVED_ITEM = {
     type: 'RECEIVED_ITEM',
-    payload: Item
+    payload: Item[]
 }
 
 const createWsStarted = () => ({
     type: 'WS_STARTED'
 });
 
-const wsReceivedItem = (item: Item) => ({
+export const wsReceivedItem = (item: Item): RECEIVED_ITEM => ({
     type: 'RECEIVED_ITEM',
-    payload: item
+    payload: [item]
 });
 
 const wsOpened = () => ({

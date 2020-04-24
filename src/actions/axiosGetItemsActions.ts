@@ -24,7 +24,7 @@ const getItemsStarted = () => ({
     type: 'GET_ITEMS_STARTED'
 });
 
-const getItemsSuccess = (items: Item[]): GET_ITEMS_SUCCESS => ({
+export const getItemsSuccess = (items: Item[]): GET_ITEMS_SUCCESS => ({
     type: 'GET_ITEMS_SUCCESS',
     payload: items
 });

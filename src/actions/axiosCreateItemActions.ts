@@ -4,7 +4,7 @@ import {Item} from "../types/Item";
 
 export type CREATE_ITEM_SUCCESS = {
     type: 'CREATE_ITEM_SUCCESS',
-    payload: Item
+    payload: Item[]
 }
 
 const myUrl = window.location.href;
@@ -22,7 +22,7 @@ export const axiosCreateItem = (item: Item) => {
 
 export const createItemSuccess = (item: Item): CREATE_ITEM_SUCCESS => ({
     type: 'CREATE_ITEM_SUCCESS',
-    payload: item
+    payload: [item]
 });
 
 const createItemStarted = () => ({
