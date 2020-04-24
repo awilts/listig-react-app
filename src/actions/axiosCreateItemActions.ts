@@ -24,7 +24,7 @@ export const axiosCreateItem = (item: Item) => {
     };
 };
 
-const createItemSuccess = (item: Item) : CREATE_ITEM_SUCCESS => ({
+export const createItemSuccess = (item: Item) : CREATE_ITEM_SUCCESS => ({
     type: CREATE_ITEM_SUCCESS,
     payload: {
         ...item
