@@ -1,6 +1,6 @@
 import React from "react";
 import {Item} from "../types/Item";
-import {State} from "../store/root-reducer";
+import {ItemState} from "../store/root-reducer";
 import {connect} from "react-redux";
 
 interface Props {
@@ -18,7 +18,7 @@ const ItemList: React.FC<Props> = (props) => {
     );
 }
 
-const mapStateToProps = (state: State) => ({
+const mapStateToProps = (state: ItemState) => ({
     items: state.items
 })
 

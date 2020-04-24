@@ -1,36 +1,30 @@
 import {Item} from "../types/Item";
 import {Dispatch} from "redux";
 
-export const RECEIVED_ITEM = 'RECEIVED_ITEM'
-export const WS_ERROR = 'WS_ERROR'
-export const WS_OPEN = 'WS_OPEN'
-export const WS_STARTED = 'WS_STARTED'
-export const WS_CLOSED = 'WS_CLOSED'
-
-export interface RECEIVED_ITEM {
-    type: string,
+export type RECEIVED_ITEM = {
+    type: 'RECEIVED_ITEM',
     payload: Item
 }
 
 const createWsStarted = () => ({
-    type: WS_STARTED
+    type: 'WS_STARTED'
 });
 
 const wsReceivedItem = (item: Item) => ({
-    type: RECEIVED_ITEM,
+    type: 'RECEIVED_ITEM',
     payload: item
 });
 
 const wsOpened = () => ({
-    type: WS_OPEN
+    type: 'WS_OPEN'
 });
 
 const wsError = () => ({
-    type: WS_ERROR
+    type: 'WS_ERROR'
 });
 
 const wsClosed = () => ({
-    type: WS_CLOSED
+    type: 'WS_CLOSED'
 });
 
 export const subscribeToItems = () => {
