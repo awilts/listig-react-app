@@ -2,12 +2,11 @@ import axios from 'axios';
 import {Dispatch} from "redux";
 import {Item} from "../types/Item";
 
-export const GET_ITEMS_SUCCESS = 'GET_ITEMS_SUCCESS'
 export const GET_ITEMS_STARTED = 'GET_ITEMS_STARTED'
 export const GET_ITEMS_FAILURE = 'GET_ITEMS_FAILURE'
 
-export interface GET_ITEMS_SUCCESS {
-    type: string,
+export type GET_ITEMS_SUCCESS = {
+    type: 'GET_ITEMS_SUCCESS',
     payload: Item[]
 }
 
@@ -29,7 +28,7 @@ const getItemsStarted = () => ({
 });
 
 const getItemsSuccess = (items: Item[]): GET_ITEMS_SUCCESS => ({
-    type: GET_ITEMS_SUCCESS,
+    type: 'GET_ITEMS_SUCCESS',
     payload: items
 });
 

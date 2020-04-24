@@ -2,12 +2,11 @@ import axios from 'axios';
 import {Dispatch} from "redux";
 import {Item} from "../types/Item";
 
-export const CREATE_ITEM_SUCCESS = 'CREATE_ITEM_SUCCESS'
-export const CREATE_ITEM_STARTED = 'CREATE_ITEM_STARTED'
-export const CREATE_ITEM_FAILURE = 'CREATE_ITEM_FAILURE'
+const CREATE_ITEM_STARTED = 'CREATE_ITEM_STARTED'
+const CREATE_ITEM_FAILURE = 'CREATE_ITEM_FAILURE'
 
-export interface CREATE_ITEM_SUCCESS {
-    type: string,
+export type CREATE_ITEM_SUCCESS = {
+    type: 'CREATE_ITEM_SUCCESS',
     payload: Item
 }
 
@@ -24,11 +23,9 @@ export const axiosCreateItem = (item: Item) => {
     };
 };
 
-export const createItemSuccess = (item: Item) : CREATE_ITEM_SUCCESS => ({
-    type: CREATE_ITEM_SUCCESS,
-    payload: {
-        ...item
-    }
+export const createItemSuccess = (item: Item): CREATE_ITEM_SUCCESS => ({
+    type: 'CREATE_ITEM_SUCCESS',
+    payload: item
 });
 
 const createItemStarted = () => ({
