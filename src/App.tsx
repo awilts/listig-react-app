@@ -1,15 +1,13 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect} from 'react';
 import axios from 'axios';
 import './App.css';
 import ItemList from "./components/ItemList";
 import {Item} from "./types/Item";
 import {connect, DispatchProp} from 'react-redux';
-import {axiosCreateItem} from "./actions/axiosCreateItemActions";
 import {axiosGetItems} from "./actions/axiosGetItemsActions";
+import CreateItemForm from "./components/CreateItemForm";
 
 const App: React.FunctionComponent<DispatchProp> = (props) => {
-
-    const [newItemText, setNewItemText] = useState<string>("");
 
     useEffect(() => {
         console.log("doing main effect");
@@ -17,7 +15,7 @@ const App: React.FunctionComponent<DispatchProp> = (props) => {
         getItems()
     }, [])
 
-    function subscribeToSocket(){
+    function subscribeToSocket() {
         const myHostname = window.location.hostname;
         const socket = new WebSocket(`ws://${myHostname}:8080/ws/items`);
         socket.addEventListener('message', async (event: any) => {
@@ -44,21 +42,6 @@ const App: React.FunctionComponent<DispatchProp> = (props) => {
         axiosGetItems()(props.dispatch)
     }
 
-    function createItem(event: any) {
-        event.preventDefault();
-        const item : Item = {
-            groupId: "gid",
-            userId: "uid",
-            text: newItemText
-        }
-        axiosCreateItem(item)(props.dispatch)
-        setNewItemText("")
-    }
-
-    function handleChange(event: any) {
-        setNewItemText(event.target.value)
-    }
-
     function clearItems() {
         const myUrl = window.location.href;
         const clearUrl = `${myUrl}backend/items/clear`
@@ -74,12 +57,7 @@ const App: React.FunctionComponent<DispatchProp> = (props) => {
     return (
         <div>
             <ItemList/>
-            <form onSubmit={createItem}>
-                <input type="text" value={newItemText} onChange={handleChange}/>
-                <button>
-                    submit
-                </button>
-            </form>
+            <CreateItemForm/>
             <button onClick={clearItems}>
                 clear items
             </button>

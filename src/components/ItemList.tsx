@@ -4,10 +4,7 @@ import {State} from "../reducers/reducer";
 import {connect} from "react-redux";
 
 function ItemList(props: { items: Item[] }) {
-    console.log({props});
-    const items = props.items;
-    console.log({items});
-    const listItems = items.map((item) =>
+    const listItems = props.items.map((item) =>
         <li key={item.messageId}>
             {item.text}
         </li>
