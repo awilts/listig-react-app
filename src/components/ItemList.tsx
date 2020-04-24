@@ -1,9 +1,13 @@
 import React from "react";
 import {Item} from "../types/Item";
-import {State} from "../reducers/reducer";
+import {State} from "../store/root-reducer";
 import {connect} from "react-redux";
 
-function ItemList(props: { items: Item[] }) {
+interface Props {
+    items: Item[]
+}
+
+const ItemList: React.FC<Props> = (props) => {
     const listItems = props.items.map((item) =>
         <li key={item.messageId}>
             {item.text}
@@ -14,6 +18,9 @@ function ItemList(props: { items: Item[] }) {
     );
 }
 
-const mapStateToProps = (state: State) => ({ items: state.items })
+const mapStateToProps = (state: State) => ({
+    items: state.items
+})
 
 export default connect(mapStateToProps)(ItemList);
+export {ItemList}

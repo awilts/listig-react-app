@@ -7,7 +7,7 @@ import CreateItemForm from "./components/CreateItemForm";
 import {subscribeToItems} from "./actions/webSocketActions";
 import ClearItemsButton from "./components/ClearItemsButton";
 
-const App: React.FunctionComponent<DispatchProp> = (props) => {
+const App: React.FC<DispatchProp> = (props) => {
 
     const dispatch = useRef(props.dispatch)
     useEffect(() => {
@@ -25,3 +25,5 @@ const App: React.FunctionComponent<DispatchProp> = (props) => {
 }
 
 export default connect()(App);
+export {App};
+

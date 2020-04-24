@@ -7,6 +7,11 @@ export const WS_OPEN = 'WS_OPEN'
 export const WS_STARTED = 'WS_STARTED'
 export const WS_CLOSED = 'WS_CLOSED'
 
+export interface RECEIVED_ITEM {
+    type: string,
+    payload: Item
+}
+
 const createWsStarted = () => ({
     type: WS_STARTED
 });
