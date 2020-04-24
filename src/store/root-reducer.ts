@@ -26,6 +26,7 @@ const addItemReducer = (state = initialState, action: ItemType): ItemState => {
                 items: unionWith(state.items, action.payload, sameMessageId)
             }
     }
+    return state
 }
 
 export default addItemReducer
