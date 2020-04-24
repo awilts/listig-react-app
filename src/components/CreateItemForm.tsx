@@ -18,13 +18,9 @@ const CreateItemForm: React.FunctionComponent<DispatchProp> = (props) => {
         setNewItemText("")
     }
 
-    function handleItemTextChange(event: any) {
-        setNewItemText(event.target.value)
-    }
-
     return (
         <form onSubmit={createItem}>
-            <input type="text" value={newItemText} onChange={handleItemTextChange}/>
+            <input type="text" value={newItemText} onChange={event => setNewItemText(event.target.value)}/>
             <button>
                 submit
             </button>
