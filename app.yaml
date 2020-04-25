@@ -3,16 +3,16 @@ api_version: 1
 threadsafe: true
 
 handlers:
-  - url: /
-    static_files: build/index.html
-    upload: build/index.html
+    - url: /
+      static_files: build/index.html
+      upload: build/index.html
 
-  - url: /
-    static_dir: build
+    - url: /
+      static_dir: build
 
 skip_files:
-  - node_modules/
-  - src/
-  - public/
-  - tsconfig.json
-  - README.md
+    - node_modules/
+    - src/
+    - public/
+    - tsconfig.json
+    - README.md
