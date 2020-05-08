@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { FC, useEffect } from 'react'
 import './App.css'
 import { ItemList } from './components/ItemList'
 import { useDispatch } from 'react-redux'
@@ -7,7 +7,7 @@ import { CreateItemForm } from './components/CreateItemForm'
 import { subscribeToItems } from './actions/webSocketActions'
 import { ClearItemsButton } from './components/ClearItemsButton'
 
-export const App: React.FC = () => {
+export const App: FC = () => {
     const dispatch = useDispatch()
 
     useEffect(() => {

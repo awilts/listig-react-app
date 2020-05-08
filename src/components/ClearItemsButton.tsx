@@ -1,9 +1,9 @@
-import React from 'react'
+import React, { FC } from 'react'
 import { useDispatch } from 'react-redux'
 import axios from 'axios'
 import { axiosGetItems } from '../actions/axiosGetItemsActions'
 
-export const ClearItemsButton: React.FC = () => {
+export const ClearItemsButton: FC = () => {
     const dispatch = useDispatch()
 
     async function clearItems() {

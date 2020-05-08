@@ -1,9 +1,9 @@
-import React, { useState } from 'react'
+import React, { FC, useState } from 'react'
 import { Item } from '../types/Item'
 import { useDispatch } from 'react-redux'
 import { axiosCreateItem } from '../actions/axiosCreateItemActions'
 
-export const CreateItemForm: React.FC = () => {
+export const CreateItemForm: FC = () => {
     const [newItemText, setNewItemText] = useState<string>('')
     let dispatch = useDispatch()
 

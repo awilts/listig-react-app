@@ -1,8 +1,8 @@
-import React from 'react'
+import React, { FC } from 'react'
 import { ItemState } from '../store/root-reducer'
 import { useSelector } from 'react-redux'
 
-export const ItemList: React.FC = () => {
+export const ItemList: FC = () => {
     const items = useSelector((state: ItemState) => state.items)
 
     const listItems = items.map((item) => (
