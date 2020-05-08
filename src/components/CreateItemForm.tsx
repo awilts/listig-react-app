@@ -3,7 +3,7 @@ import { Item } from '../types/Item'
 import { useDispatch } from 'react-redux'
 import { axiosCreateItem } from '../actions/axiosCreateItemActions'
 
-const CreateItemForm: React.FC = () => {
+export const CreateItemForm: React.FC = () => {
     const [newItemText, setNewItemText] = useState<string>('')
     let dispatch = useDispatch()
 
@@ -29,5 +29,3 @@ const CreateItemForm: React.FC = () => {
         </form>
     )
 }
-
-export default CreateItemForm

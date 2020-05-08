@@ -1,13 +1,13 @@
 import React, { useEffect } from 'react'
 import './App.css'
-import ItemList from './components/ItemList'
+import { ItemList } from './components/ItemList'
 import { useDispatch } from 'react-redux'
 import { axiosGetItems } from './actions/axiosGetItemsActions'
-import CreateItemForm from './components/CreateItemForm'
+import { CreateItemForm } from './components/CreateItemForm'
 import { subscribeToItems } from './actions/webSocketActions'
-import ClearItemsButton from './components/ClearItemsButton'
+import { ClearItemsButton } from './components/ClearItemsButton'
 
-const App: React.FC = () => {
+export const App: React.FC = () => {
     const dispatch = useDispatch()
 
     useEffect(() => {
@@ -23,5 +23,3 @@ const App: React.FC = () => {
         </div>
     )
 }
-
-export default App
