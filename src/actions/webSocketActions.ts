@@ -6,7 +6,7 @@ export type RECEIVED_ITEM = {
     payload: Item[]
 }
 
-const createWsStarted = () => ({
+export const createWsStarted = () => ({
     type: 'WS_STARTED',
 })
 

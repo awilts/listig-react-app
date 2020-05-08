@@ -20,7 +20,7 @@ export const axiosGetItems = () => {
     }
 }
 
-const getItemsStarted = () => ({
+export const getItemsStarted = () => ({
     type: 'GET_ITEMS_STARTED',
 })
 
