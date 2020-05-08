@@ -2,7 +2,7 @@ import React, { FC } from 'react'
 import { ItemState } from '../store/root-reducer'
 import { useSelector } from 'react-redux'
 
-export const ItemList: FC = () => {
+const ItemList: FC = () => {
     const items = useSelector((state: ItemState) => state.items)
 
     const listItems = items.map((item) => (
@@ -10,3 +10,5 @@ export const ItemList: FC = () => {
     ))
     return <ul>{listItems}</ul>
 }
+
+export default ItemList

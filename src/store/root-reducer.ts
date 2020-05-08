@@ -8,7 +8,7 @@ export interface ItemState {
     items: Item[]
 }
 
-const initialState: ItemState = {
+export const initialState: ItemState = {
     items: [],
 }
 

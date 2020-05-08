@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux'
 import axios from 'axios'
 import { axiosGetItems } from '../actions/axiosGetItemsActions'
 
-export const ClearItemsButton: FC = () => {
+const ClearItemsButton: FC = () => {
     const dispatch = useDispatch()
 
     async function clearItems() {
@@ -15,3 +15,5 @@ export const ClearItemsButton: FC = () => {
 
     return <button onClick={clearItems}>clear items</button>
 }
+
+export default ClearItemsButton
