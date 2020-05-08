@@ -1,17 +1,19 @@
 import React from 'react'
-import { connect, DispatchProp } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import axios from 'axios'
 import { axiosGetItems } from '../actions/axiosGetItemsActions'
 
-const ClearItemsButton: React.FunctionComponent<DispatchProp> = (props) => {
+const ClearItemsButton: React.FC = () => {
+    const dispatch = useDispatch()
+
     async function clearItems() {
         const myUrl = window.location.href
         const clearUrl = `${myUrl}backend/items/clear`
         await axios.post(clearUrl)
-        axiosGetItems()(props.dispatch)
+        axiosGetItems()(dispatch)
     }
 
     return <button onClick={clearItems}>clear items</button>
 }
 
-export default connect()(ClearItemsButton)
+export default ClearItemsButton

@@ -1,10 +1,11 @@
 import React, { useState } from 'react'
 import { Item } from '../types/Item'
-import { connect, DispatchProp } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { axiosCreateItem } from '../actions/axiosCreateItemActions'
 
-const CreateItemForm: React.FunctionComponent<DispatchProp> = (props) => {
+const CreateItemForm: React.FC = () => {
     const [newItemText, setNewItemText] = useState<string>('')
+    let dispatch = useDispatch()
 
     function createItem(event: any) {
         event.preventDefault()
@@ -13,7 +14,7 @@ const CreateItemForm: React.FunctionComponent<DispatchProp> = (props) => {
             userId: 'uid',
             text: newItemText,
         }
-        axiosCreateItem(item)(props.dispatch)
+        axiosCreateItem(item)(dispatch)
         setNewItemText('')
     }
 
@@ -29,4 +30,4 @@ const CreateItemForm: React.FunctionComponent<DispatchProp> = (props) => {
     )
 }
 
-export default connect()(CreateItemForm)
+export default CreateItemForm
