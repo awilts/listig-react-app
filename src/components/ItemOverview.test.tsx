@@ -7,6 +7,7 @@ import ItemOverview from './ItemOverview'
 import { initialState } from '../store/root-reducer'
 import { createWsStarted } from '../actions/webSocketActions'
 import { getItemsStarted } from '../actions/axiosGetItemsActions'
+import { generateItem } from '../test/utils/generators'
 
 const mockStore = configureStore([])
 
@@ -35,5 +36,30 @@ describe('ItemOverview', () => {
             name: 'submit',
         })
         expect(submitButton).not.toBeNull()
+    })
+
+    it('renders no items with the default state', () => {
+        const store = mockStore(initialState)
+        const itemOverview = render(
+            <Provider store={store}>
+                <ItemOverview />
+            </Provider>
+        )
+        const listElements = itemOverview.queryAllByRole('listitem')
+        expect(listElements).toHaveLength(0)
+    })
+
+    it('renders one item', () => {
+        const state = Object.assign({}, initialState)
+        const item = generateItem()
+        state.items.push(item)
+        const store = mockStore(state)
+        const itemOverview = render(
+            <Provider store={store}>
+                <ItemOverview />
+            </Provider>
+        )
+        const listElements = itemOverview.queryAllByRole('listitem')
+        expect(listElements).toHaveLength(1)
     })
 })
