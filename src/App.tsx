@@ -1,25 +1,11 @@
-import React, { FC, useEffect } from 'react'
+import React, { FC } from 'react'
 import './App.css'
-import ItemList from './components/ItemList'
-import { useDispatch } from 'react-redux'
-import { axiosGetItems } from './actions/axiosGetItemsActions'
-import CreateItemForm from './components/CreateItemForm'
-import ClearItemsButton from './components/ClearItemsButton'
-import { subscribeToItems } from './actions/webSocketActions'
+import ItemOverview from './components/ItemOverview'
 
 const App: FC = () => {
-    const dispatch = useDispatch()
-
-    useEffect(() => {
-        subscribeToItems()(dispatch)
-        axiosGetItems()(dispatch)
-    }, [dispatch])
-
     return (
         <div>
-            <ItemList />
-            <CreateItemForm />
-            <ClearItemsButton />
+            <ItemOverview />
         </div>
     )
 }
