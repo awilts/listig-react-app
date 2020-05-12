@@ -5,9 +5,9 @@ import configureStore from 'redux-mock-store'
 import { Provider } from 'react-redux'
 import ItemOverview from './ItemOverview'
 import { initialState } from '../store/root-reducer'
-import { createWsStarted } from '../actions/webSocketActions'
-import { getItemsStarted } from '../actions/axiosGetItemsActions'
 import { generateItem } from '../test/utils/generators'
+import { SUBSCRIBE_ITEMS_ACTION } from '../sagas/subcribeToItems'
+import { GET_ITEMS_ACTION } from '../sagas/getItemsSaga'
 
 const mockStore = configureStore([])
 
@@ -21,8 +21,8 @@ describe('ItemOverview', () => {
         )
         const actions = store.getActions()
         expect(actions).toHaveLength(2)
-        expect(actions).toContainEqual(createWsStarted())
-        expect(actions).toContainEqual(getItemsStarted())
+        expect(actions).toContainEqual(SUBSCRIBE_ITEMS_ACTION)
+        expect(actions).toContainEqual(GET_ITEMS_ACTION)
     })
 
     it('renders the item creation dialog', () => {

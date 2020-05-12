@@ -1,7 +1,7 @@
 import React, { FC } from 'react'
 import { useDispatch } from 'react-redux'
 import axios from 'axios'
-import { axiosGetItems } from '../actions/axiosGetItemsActions'
+import { GET_ITEMS_ACTION } from '../sagas/getItemsSaga'
 
 const ClearItemsButton: FC = () => {
     const dispatch = useDispatch()
@@ -10,7 +10,7 @@ const ClearItemsButton: FC = () => {
         const myUrl = window.location.href
         const clearUrl = `${myUrl}backend/items/clear`
         await axios.post(clearUrl)
-        axiosGetItems()(dispatch)
+        dispatch(GET_ITEMS_ACTION)
     }
 
     return <button onClick={clearItems}>clear items</button>

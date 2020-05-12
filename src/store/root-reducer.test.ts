@@ -1,8 +1,11 @@
 import itemApp from './root-reducer'
 import { Item } from '../types/Item'
-import { createItemSuccess } from '../actions/axiosCreateItemActions'
-import { getItemsSuccess } from '../actions/axiosGetItemsActions'
-import { wsReceivedItem } from '../actions/webSocketActions'
+import { wsReceivedItem } from '../sagas/subcribeToItems'
+import {
+    GET_ITEMS_SUCCESS,
+    GET_ITEMS_SUCCESS_TYPE,
+} from '../sagas/getItemsSaga'
+import { CREATE_ITEM_SUCCESS } from '../sagas/createItemSaga'
 
 const testItem: Item = {
     messageId: 'mId',
@@ -13,7 +16,7 @@ const testItem: Item = {
 
 describe('action CREATE_ITEM_SUCCESS', () => {
     it('should add an item to an empty state', () => {
-        const resultingState = itemApp(undefined, createItemSuccess(testItem))
+        const resultingState = itemApp(undefined, CREATE_ITEM_SUCCESS(testItem))
 
         const expectedState = { items: [testItem] }
         expect(resultingState).toEqual(expectedState)
@@ -23,7 +26,10 @@ describe('action CREATE_ITEM_SUCCESS', () => {
         const initialState = { items: [testItem] }
         const newItem = Object.assign({}, testItem, { messageId: 'mId2' })
 
-        const resultingState = itemApp(initialState, createItemSuccess(newItem))
+        const resultingState = itemApp(
+            initialState,
+            CREATE_ITEM_SUCCESS(newItem)
+        )
 
         const expectedState = { items: [testItem, newItem] }
         expect(resultingState).toEqual(expectedState)
@@ -33,7 +39,10 @@ describe('action CREATE_ITEM_SUCCESS', () => {
         const initialState = { items: [testItem] }
         const newItem = Object.assign({}, testItem)
 
-        const resultingState = itemApp(initialState, createItemSuccess(newItem))
+        const resultingState = itemApp(
+            initialState,
+            CREATE_ITEM_SUCCESS(newItem)
+        )
 
         const expectedState = { items: [testItem] }
         expect(resultingState).toEqual(expectedState)
@@ -75,7 +84,7 @@ describe('action GET_ITEMS_SUCCESS', () => {
 
         const resultingState = itemApp(
             undefined,
-            getItemsSuccess([testItem, newItem])
+            GET_ITEMS_SUCCESS([testItem, newItem])
         )
 
         const expectedState = { items: [testItem, newItem] }
@@ -88,7 +97,7 @@ describe('action GET_ITEMS_SUCCESS', () => {
 
         const resultingState = itemApp(
             initialState,
-            getItemsSuccess([testItem, testItem2])
+            GET_ITEMS_SUCCESS([testItem, testItem2])
         )
 
         const expectedState = { items: [testItem, testItem2] }

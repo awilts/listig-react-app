@@ -6,6 +6,10 @@ export type RECEIVED_ITEM = {
     payload: Item[]
 }
 
+export const SUBSCRIBE_ITEMS_ACTION = {
+    type: 'SUBSCRIBE_ITEMS_ACTION',
+}
+
 export const createWsStarted = () => ({
     type: 'WS_STARTED',
 })
