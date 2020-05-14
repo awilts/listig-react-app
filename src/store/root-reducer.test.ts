@@ -1,10 +1,7 @@
 import itemApp from './root-reducer'
 import { Item } from '../types/Item'
 import { wsReceivedItem } from '../sagas/subcribeToItems'
-import {
-    GET_ITEMS_SUCCESS,
-    GET_ITEMS_SUCCESS_TYPE,
-} from '../sagas/getItemsSaga'
+import { GET_ITEMS_SUCCESS } from '../sagas/getItemsSaga'
 import { CREATE_ITEM_SUCCESS } from '../sagas/createItemSaga'
 
 const testItem: Item = {

@@ -11,8 +11,9 @@ export type CREATE_ITEM_SUCCESS_TYPE = {
     type: 'CREATE_ITEM_SUCCESS'
     payload: Item[]
 }
-const CREATE_ITEM_STARTED = { type: 'CREATE_ITEM_STARTED' }
-export const CREATE_ITEM_ACTION = (payload: Item) => {
+export const CREATE_ITEM_STARTED = { type: 'CREATE_ITEM_STARTED' }
+
+export const CREATE_ITEM_ACTION = (payload: Item): CREATE_ITEM_TYPE => {
     return {
         type: 'CREATE_ITEM',
         payload: payload,
@@ -22,7 +23,7 @@ export const CREATE_ITEM_ACTION = (payload: Item) => {
 const myUrl = window.location.href
 const postUrl = `${myUrl}backend/items`
 
-function* createItem(action: CREATE_ITEM_TYPE) {
+export function* createItem(action: CREATE_ITEM_TYPE) {
     yield put(CREATE_ITEM_STARTED)
     try {
         const result = yield call(axios.post, postUrl, action.payload)
@@ -37,7 +38,7 @@ export const CREATE_ITEM_SUCCESS = (item: Item): CREATE_ITEM_SUCCESS_TYPE => ({
     payload: [item],
 })
 
-const CREATE_ITEM_FAILURE = (error: any) => ({
+export const CREATE_ITEM_FAILURE = (error: any) => ({
     type: 'CREATE_ITEM_FAILURE',
     payload: {
         error,
