@@ -1,0 +1,26 @@
+import { expectSaga } from 'redux-saga-test-plan'
+import { createItemAction, getItemsAction } from '../actions/actions'
+import rootSaga from './rootSaga'
+import getItemsSaga from './getItemsSaga'
+import createItemSaga from './createItemSaga'
+import axios from 'axios'
+import { generateItem } from '../test/utils/generators'
+
+jest.mock('axios')
+
+describe('rootSaga', () => {
+    it('should start createItemSaga when receiving CREATE_ITEM action', () => {
+        const item = generateItem()
+        return expectSaga(rootSaga)
+            .fork(createItemSaga, createItemAction(item))
+            .dispatch(createItemAction(item))
+            .silentRun()
+    })
+
+    it('should start getItemsSaga when receiving GET_ITEM action', () => {
+        return expectSaga(rootSaga)
+            .fork(getItemsSaga, getItemsAction())
+            .dispatch(getItemsAction())
+            .silentRun()
+    })
+})
