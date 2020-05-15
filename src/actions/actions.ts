@@ -1,5 +1,4 @@
 import { Item } from '../types/Item'
-import { GET_ITEMS_SUCCESS_TYPE } from '../sagas/getItemsSaga'
 
 export const createItemAction = (payload: Item) => {
     return {
@@ -8,12 +7,7 @@ export const createItemAction = (payload: Item) => {
     }
 }
 
-export type ActionWithPayload = {
-    type: string
-    payload: Item
-}
-
-export const CREATE_ITEM_SUCCESS = (item: Item) => ({
+export const CREATE_ITEM_SUCCESS = (item: Item): CREATE_ITEM_SUCCESS_TYPE => ({
     type: 'CREATE_ITEM_SUCCESS',
     payload: [item],
 })
@@ -31,6 +25,10 @@ export const getItemsAction = () => ({
 export const GET_ITEMS_STARTED = () => ({
     type: 'GET_ITEMS_STARTED',
 })
+export type GET_ITEMS_SUCCESS_TYPE = {
+    type: 'GET_ITEMS_SUCCESS'
+    payload: Item[]
+}
 export const GET_ITEMS_SUCCESS = (items: Item[]): GET_ITEMS_SUCCESS_TYPE => ({
     type: 'GET_ITEMS_SUCCESS',
     payload: items,

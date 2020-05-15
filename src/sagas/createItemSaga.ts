@@ -4,13 +4,13 @@ import {
     CREATE_ITEM_FAILURE,
     CREATE_ITEM_STARTED,
     CREATE_ITEM_SUCCESS,
-    ActionWithPayload,
+    CREATE_ITEM_SUCCESS_TYPE,
 } from '../actions/actions'
 
 const myUrl = window.location.href
 const postUrl = `${myUrl}backend/items`
 
-function* createItemSaga(action: ActionWithPayload) {
+function* createItemSaga(action: CREATE_ITEM_SUCCESS_TYPE) {
     yield put(CREATE_ITEM_STARTED())
     try {
         const result = yield call(axios.post, postUrl, action.payload)
