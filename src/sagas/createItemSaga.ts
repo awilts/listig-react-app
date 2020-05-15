@@ -1,22 +1,22 @@
 import axios from 'axios'
 import { call, put } from 'redux-saga/effects'
 import {
-    CREATE_ITEM_FAILURE,
-    CREATE_ITEM_STARTED,
-    CREATE_ITEM_SUCCESS,
-    CREATE_ITEM_SUCCESS_TYPE,
+    createItemFailureAction,
+    createItemStartedAction,
+    createItemSuccessAction,
 } from '../actions/actions'
+import { CreateItemAction } from '../actions/actionTypes'
 
 const myUrl = window.location.href
 const postUrl = `${myUrl}backend/items`
 
-function* createItemSaga(action: CREATE_ITEM_SUCCESS_TYPE) {
-    yield put(CREATE_ITEM_STARTED())
+function* createItemSaga(action: CreateItemAction) {
+    yield put(createItemStartedAction())
     try {
         const result = yield call(axios.post, postUrl, action.payload)
-        yield put(CREATE_ITEM_SUCCESS(result.data))
+        yield put(createItemSuccessAction(result.data))
     } catch (err) {
-        yield put(CREATE_ITEM_FAILURE(err.message))
+        yield put(createItemFailureAction(err.message))
     }
 }
 

@@ -1,7 +1,10 @@
 import itemApp from './root-reducer'
 import { Item } from '../types/Item'
 import { wsReceivedItem } from '../sagas/subcribeToItems'
-import { CREATE_ITEM_SUCCESS, GET_ITEMS_SUCCESS } from '../actions/actions'
+import {
+    createItemSuccessAction,
+    getItemsSuccessAction,
+} from '../actions/actions'
 
 const testItem: Item = {
     messageId: 'mId',
@@ -12,7 +15,10 @@ const testItem: Item = {
 
 describe('action CREATE_ITEM_SUCCESS', () => {
     it('should add an item to an empty state', () => {
-        const resultingState = itemApp(undefined, CREATE_ITEM_SUCCESS(testItem))
+        const resultingState = itemApp(
+            undefined,
+            createItemSuccessAction(testItem)
+        )
 
         const expectedState = { items: [testItem] }
         expect(resultingState).toEqual(expectedState)
@@ -24,7 +30,7 @@ describe('action CREATE_ITEM_SUCCESS', () => {
 
         const resultingState = itemApp(
             initialState,
-            CREATE_ITEM_SUCCESS(newItem)
+            createItemSuccessAction(newItem)
         )
 
         const expectedState = { items: [testItem, newItem] }
@@ -37,7 +43,7 @@ describe('action CREATE_ITEM_SUCCESS', () => {
 
         const resultingState = itemApp(
             initialState,
-            CREATE_ITEM_SUCCESS(newItem)
+            createItemSuccessAction(newItem)
         )
 
         const expectedState = { items: [testItem] }
@@ -80,7 +86,7 @@ describe('action GET_ITEMS_SUCCESS', () => {
 
         const resultingState = itemApp(
             undefined,
-            GET_ITEMS_SUCCESS([testItem, newItem])
+            getItemsSuccessAction([testItem, newItem])
         )
 
         const expectedState = { items: [testItem, newItem] }
@@ -93,7 +99,7 @@ describe('action GET_ITEMS_SUCCESS', () => {
 
         const resultingState = itemApp(
             initialState,
-            GET_ITEMS_SUCCESS([testItem, testItem2])
+            getItemsSuccessAction([testItem, testItem2])
         )
 
         const expectedState = { items: [testItem, testItem2] }

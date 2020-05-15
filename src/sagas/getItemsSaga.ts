@@ -1,21 +1,21 @@
 import axios from 'axios'
 import { call, put } from 'redux-saga/effects'
 import {
-    GET_ITEMS_FAILURE,
-    GET_ITEMS_STARTED,
-    GET_ITEMS_SUCCESS,
+    getItemsFailureAction,
+    getItemsStartedAction,
+    getItemsSuccessAction,
 } from '../actions/actions'
 
 const myUrl = window.location.href
 const postUrl = `${myUrl}backend/items`
 
 function* getItemsSaga() {
-    yield put(GET_ITEMS_STARTED())
+    yield put(getItemsStartedAction())
     try {
         const result = yield call(axios.get, postUrl)
-        yield put(GET_ITEMS_SUCCESS(result.data))
+        yield put(getItemsSuccessAction(result.data))
     } catch (err) {
-        yield put(GET_ITEMS_FAILURE(err.message))
+        yield put(getItemsFailureAction(err.message))
     }
 }
 

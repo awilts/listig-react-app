@@ -2,9 +2,9 @@ import { generateItem } from '../test/utils/generators'
 import { testSaga } from 'redux-saga-test-plan'
 import axios from 'axios'
 import {
-    GET_ITEMS_FAILURE,
-    GET_ITEMS_STARTED,
-    GET_ITEMS_SUCCESS,
+    getItemsFailureAction,
+    getItemsStartedAction,
+    getItemsSuccessAction,
 } from '../actions/actions'
 import getItemsSaga from './getItemsSaga'
 const myUrl = window.location.href
@@ -15,11 +15,11 @@ describe('getItemsSaga', () => {
         const item = generateItem()
         testSaga(getItemsSaga)
             .next()
-            .put(GET_ITEMS_STARTED())
+            .put(getItemsStartedAction())
             .next()
             .call(axios.get, getUrl)
             .next({ data: [item] })
-            .put(GET_ITEMS_SUCCESS([item]))
+            .put(getItemsSuccessAction([item]))
             .next()
             .isDone()
     })
@@ -27,11 +27,11 @@ describe('getItemsSaga', () => {
     it('should throw an error-action if get fails', () => {
         testSaga(getItemsSaga)
             .next()
-            .put(GET_ITEMS_STARTED())
+            .put(getItemsStartedAction())
             .next()
             .call(axios.get, getUrl)
             .throw(new Error('Error'))
-            .put(GET_ITEMS_FAILURE('Error'))
+            .put(getItemsFailureAction('Error'))
             .next()
             .isDone()
     })

@@ -3,9 +3,9 @@ import { generateItem } from '../test/utils/generators'
 import { testSaga } from 'redux-saga-test-plan'
 import axios from 'axios'
 import {
-    CREATE_ITEM_FAILURE,
-    CREATE_ITEM_STARTED,
-    CREATE_ITEM_SUCCESS,
+    createItemFailureAction,
+    createItemStartedAction,
+    createItemSuccessAction,
     createItemAction,
 } from '../actions/actions'
 const myUrl = window.location.href
@@ -16,11 +16,11 @@ describe('createItemSaga', () => {
         const item = generateItem()
         testSaga(createItemSaga, createItemAction(item))
             .next()
-            .put(CREATE_ITEM_STARTED())
+            .put(createItemStartedAction())
             .next()
             .call(axios.post, postUrl, item)
             .next({ data: item })
-            .put(CREATE_ITEM_SUCCESS(item))
+            .put(createItemSuccessAction(item))
             .next()
             .isDone()
     })
@@ -29,11 +29,11 @@ describe('createItemSaga', () => {
         const item = generateItem()
         testSaga(createItemSaga, createItemAction(item))
             .next()
-            .put(CREATE_ITEM_STARTED())
+            .put(createItemStartedAction())
             .next()
             .call(axios.post, postUrl, item)
             .throw(new Error('Error'))
-            .put(CREATE_ITEM_FAILURE('Error'))
+            .put(createItemFailureAction('Error'))
             .next()
             .isDone()
     })

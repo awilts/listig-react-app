@@ -1,7 +1,7 @@
 import { Item } from '../types/Item'
 import { Dispatch } from 'redux'
 
-export type RECEIVED_ITEM = {
+export type ReceivedItem = {
     type: 'RECEIVED_ITEM'
     payload: Item[]
 }
@@ -14,7 +14,7 @@ export const createWsStarted = () => ({
     type: 'WS_STARTED',
 })
 
-export const wsReceivedItem = (item: Item): RECEIVED_ITEM => ({
+export const wsReceivedItem = (item: Item): ReceivedItem => ({
     type: 'RECEIVED_ITEM',
     payload: [item],
 })

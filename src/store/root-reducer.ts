@@ -1,10 +1,10 @@
 import { Item } from '../types/Item'
 import { unionWith } from 'lodash'
-import { RECEIVED_ITEM } from '../sagas/subcribeToItems'
+import { ReceivedItem } from '../sagas/subcribeToItems'
 import {
-    CREATE_ITEM_SUCCESS_TYPE,
-    GET_ITEMS_SUCCESS_TYPE,
-} from '../actions/actions'
+    CreateItemsSuccessAction,
+    GetItemsSuccessAction,
+} from '../actions/actionTypes'
 
 export interface ItemState {
     items: Item[]
@@ -17,10 +17,7 @@ export const initialState: ItemState = {
 const sameMessageId = (itemA: Item, itemB: Item) =>
     itemA.messageId === itemB.messageId
 
-type ItemType =
-    | GET_ITEMS_SUCCESS_TYPE
-    | CREATE_ITEM_SUCCESS_TYPE
-    | RECEIVED_ITEM
+type ItemType = GetItemsSuccessAction | CreateItemsSuccessAction | ReceivedItem
 
 const addItemReducer = (state = initialState, action: ItemType): ItemState => {
     switch (action.type) {

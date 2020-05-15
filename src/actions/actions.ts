@@ -1,43 +1,45 @@
 import { Item } from '../types/Item'
+import {
+    CreateItemAction,
+    CreateItemsSuccessAction,
+    GetItemsSuccessAction,
+} from './actionTypes'
 
-export const createItemAction = (payload: Item) => {
+export const createItemAction = (payload: Item): CreateItemAction => {
     return {
         type: 'CREATE_ITEM',
         payload: payload,
     }
 }
 
-export const CREATE_ITEM_SUCCESS = (item: Item): CREATE_ITEM_SUCCESS_TYPE => ({
+export const createItemSuccessAction = (
+    item: Item
+): CreateItemsSuccessAction => ({
     type: 'CREATE_ITEM_SUCCESS',
     payload: [item],
 })
 
-export const CREATE_ITEM_FAILURE = (error: any) => ({
+export const createItemFailureAction = (error: any) => ({
     type: 'CREATE_ITEM_FAILURE',
     payload: {
         error,
     },
 })
-export const CREATE_ITEM_STARTED = () => ({ type: 'CREATE_ITEM_STARTED' })
+export const createItemStartedAction = () => ({ type: 'CREATE_ITEM_STARTED' })
 export const getItemsAction = () => ({
     type: 'GET_ITEMS',
 })
-export const GET_ITEMS_STARTED = () => ({
+export const getItemsStartedAction = () => ({
     type: 'GET_ITEMS_STARTED',
 })
-export type GET_ITEMS_SUCCESS_TYPE = {
-    type: 'GET_ITEMS_SUCCESS'
-    payload: Item[]
-}
-export const GET_ITEMS_SUCCESS = (items: Item[]): GET_ITEMS_SUCCESS_TYPE => ({
+
+export const getItemsSuccessAction = (
+    items: Item[]
+): GetItemsSuccessAction => ({
     type: 'GET_ITEMS_SUCCESS',
     payload: items,
 })
-export const GET_ITEMS_FAILURE = (error: any) => ({
+export const getItemsFailureAction = (error: any) => ({
     type: 'GET_ITEMS_FAILURE',
     payload: error,
 })
-export type CREATE_ITEM_SUCCESS_TYPE = {
-    type: 'CREATE_ITEM_SUCCESS'
-    payload: Item[]
-}
