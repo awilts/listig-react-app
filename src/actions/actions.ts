@@ -5,9 +5,10 @@ import {
     GetItemsSuccessAction,
 } from './actionTypes'
 
+export const CREATE_ITEM = 'CREATE_ITEM'
 export const createItemAction = (payload: Item): CreateItemAction => {
     return {
-        type: 'CREATE_ITEM',
+        type: CREATE_ITEM,
         payload: payload,
     }
 }
@@ -26,8 +27,9 @@ export const createItemFailureAction = (error: any) => ({
     },
 })
 export const createItemStartedAction = () => ({ type: 'CREATE_ITEM_STARTED' })
+export const GET_ITEMS = 'GET_ITEMS'
 export const getItemsAction = () => ({
-    type: 'GET_ITEMS',
+    type: GET_ITEMS,
 })
 export const getItemsStartedAction = () => ({
     type: 'GET_ITEMS_STARTED',
