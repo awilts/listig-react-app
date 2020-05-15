@@ -1,7 +1,7 @@
 import React, { FC, useState } from 'react'
 import { Item } from '../types/Item'
 import { useDispatch } from 'react-redux'
-import { CREATE_ITEM_ACTION } from '../sagas/createItemSaga'
+import { createItemAction } from '../actions/actions'
 
 const CreateItemForm: FC = () => {
     const [newItemText, setNewItemText] = useState<string>('')
@@ -14,7 +14,7 @@ const CreateItemForm: FC = () => {
             userId: 'uid',
             text: newItemText,
         }
-        dispatch(CREATE_ITEM_ACTION(item))
+        dispatch(createItemAction(item))
         setNewItemText('')
     }
 

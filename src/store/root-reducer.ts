@@ -2,10 +2,7 @@ import { Item } from '../types/Item'
 import { unionWith } from 'lodash'
 import { GET_ITEMS_SUCCESS_TYPE } from '../sagas/getItemsSaga'
 import { RECEIVED_ITEM } from '../sagas/subcribeToItems'
-import {
-    CREATE_ITEM_SUCCESS,
-    CREATE_ITEM_SUCCESS_TYPE,
-} from '../sagas/createItemSaga'
+import { CREATE_ITEM_SUCCESS_TYPE } from '../actions/actions'
 
 export interface ItemState {
     items: Item[]

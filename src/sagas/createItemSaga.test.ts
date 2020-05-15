@@ -1,12 +1,12 @@
-import createItemSaga, { createItem } from './createItemSaga'
+import createItemSaga from './createItemSaga'
 import { generateItem } from '../test/utils/generators'
 import { testSaga } from 'redux-saga-test-plan'
 import axios from 'axios'
 import {
-    CREATE_ITEM_ACTION,
     CREATE_ITEM_FAILURE,
     CREATE_ITEM_STARTED,
     CREATE_ITEM_SUCCESS,
+    createItemAction,
 } from '../actions/actions'
 const myUrl = window.location.href
 const postUrl = `${myUrl}backend/items`
@@ -14,7 +14,7 @@ const postUrl = `${myUrl}backend/items`
 describe('createItemSaga', () => {
     it('should post an item via axios', () => {
         const item = generateItem()
-        testSaga(createItem, CREATE_ITEM_ACTION(item))
+        testSaga(createItemSaga, createItemAction(item))
             .next()
             .put(CREATE_ITEM_STARTED())
             .next()
@@ -27,7 +27,7 @@ describe('createItemSaga', () => {
 
     it('should throw an error-action if post fails', () => {
         const item = generateItem()
-        testSaga(createItem, CREATE_ITEM_ACTION(item))
+        testSaga(createItemSaga, createItemAction(item))
             .next()
             .put(CREATE_ITEM_STARTED())
             .next()
