@@ -45,3 +45,8 @@ export const getItemsFailureAction = (error: any) => ({
     type: 'GET_ITEMS_FAILURE',
     payload: error,
 })
+
+export const SUBSCRIBE_TO_ITEMS = 'SUBSCRIBE_TO_ITEMS'
+export const subscribeToItemsAction = () => ({
+    type: SUBSCRIBE_TO_ITEMS,
+})

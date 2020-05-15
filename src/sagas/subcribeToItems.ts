@@ -31,7 +31,9 @@ const wsClosed = () => ({
     type: 'WS_CLOSED',
 })
 
-export const subscribeToItems = () => {
+export function* subscribeToItems() {}
+
+export const subscribeToItemsOld = () => {
     return (dispatch: Dispatch) => {
         dispatch(createWsStarted())
         const myHostname = window.location.hostname
