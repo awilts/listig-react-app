@@ -1,8 +1,7 @@
 import itemApp from './root-reducer'
 import { Item } from '../types/Item'
 import { wsReceivedItem } from '../sagas/subcribeToItems'
-import { GET_ITEMS_SUCCESS } from '../sagas/getItemsSaga'
-import { CREATE_ITEM_SUCCESS } from '../actions/actions'
+import { CREATE_ITEM_SUCCESS, GET_ITEMS_SUCCESS } from '../actions/actions'
 
 const testItem: Item = {
     messageId: 'mId',

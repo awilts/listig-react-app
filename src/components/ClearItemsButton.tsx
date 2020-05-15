@@ -1,7 +1,7 @@
 import React, { FC } from 'react'
 import { useDispatch } from 'react-redux'
 import axios from 'axios'
-import { GET_ITEMS_ACTION } from '../sagas/getItemsSaga'
+import { GET_ITEMS_ACTION } from '../actions/actions'
 
 const ClearItemsButton: FC = () => {
     const dispatch = useDispatch()

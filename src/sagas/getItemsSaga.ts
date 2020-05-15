@@ -1,6 +1,12 @@
 import axios from 'axios'
 import { call, put, takeEvery } from 'redux-saga/effects'
 import { Item } from '../types/Item'
+import {
+    GET_ITEMS_ACTION,
+    GET_ITEMS_FAILURE,
+    GET_ITEMS_STARTED,
+    GET_ITEMS_SUCCESS,
+} from '../actions/actions'
 
 export type GET_ITEMS_SUCCESS_TYPE = {
     type: 'GET_ITEMS_SUCCESS'
@@ -10,11 +16,8 @@ export type GET_ITEMS_SUCCESS_TYPE = {
 const myUrl = window.location.href
 const postUrl = `${myUrl}backend/items`
 
-export const GET_ITEMS_ACTION = { type: 'GET_ITEMS' }
-export const GET_ITEMS_STARTED = { type: 'GET_ITEMS_STARTED' }
-
 export function* getItems() {
-    yield put(GET_ITEMS_STARTED)
+    yield put(GET_ITEMS_STARTED())
     try {
         const result = yield call(axios.get, postUrl)
         yield put(GET_ITEMS_SUCCESS(result.data))
@@ -23,18 +26,8 @@ export function* getItems() {
     }
 }
 
-export const GET_ITEMS_SUCCESS = (items: Item[]): GET_ITEMS_SUCCESS_TYPE => ({
-    type: 'GET_ITEMS_SUCCESS',
-    payload: items,
-})
-
-export const GET_ITEMS_FAILURE = (error: any) => ({
-    type: 'GET_ITEMS_FAILURE',
-    payload: error,
-})
-
 function* getItemsSaga() {
-    yield takeEvery(GET_ITEMS_ACTION.type, getItems)
+    yield takeEvery(GET_ITEMS_ACTION().type, getItems)
 }
 
 export default getItemsSaga

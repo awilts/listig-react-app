@@ -7,7 +7,7 @@ import ItemOverview from './ItemOverview'
 import { initialState } from '../store/root-reducer'
 import { generateItem } from '../test/utils/generators'
 import { SUBSCRIBE_ITEMS_ACTION } from '../sagas/subcribeToItems'
-import { GET_ITEMS_ACTION } from '../sagas/getItemsSaga'
+import { GET_ITEMS_ACTION } from '../actions/actions'
 
 const mockStore = configureStore([])
 
@@ -22,7 +22,7 @@ describe('ItemOverview', () => {
         const actions = store.getActions()
         expect(actions).toHaveLength(2)
         expect(actions).toContainEqual(SUBSCRIBE_ITEMS_ACTION)
-        expect(actions).toContainEqual(GET_ITEMS_ACTION)
+        expect(actions).toContainEqual(GET_ITEMS_ACTION())
     })
 
     it('renders the item creation dialog', () => {

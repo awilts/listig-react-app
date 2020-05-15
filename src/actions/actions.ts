@@ -1,4 +1,5 @@
 import { Item } from '../types/Item'
+import { GET_ITEMS_SUCCESS_TYPE } from '../sagas/getItemsSaga'
 
 export const CREATE_ITEM_ACTION = (payload: Item) => {
     return {
@@ -24,3 +25,17 @@ export const CREATE_ITEM_FAILURE = (error: any) => ({
     },
 })
 export const CREATE_ITEM_STARTED = () => ({ type: 'CREATE_ITEM_STARTED' })
+export const GET_ITEMS_ACTION = () => ({
+    type: 'GET_ITEMS',
+})
+export const GET_ITEMS_STARTED = () => ({
+    type: 'GET_ITEMS_STARTED',
+})
+export const GET_ITEMS_SUCCESS = (items: Item[]): GET_ITEMS_SUCCESS_TYPE => ({
+    type: 'GET_ITEMS_SUCCESS',
+    payload: items,
+})
+export const GET_ITEMS_FAILURE = (error: any) => ({
+    type: 'GET_ITEMS_FAILURE',
+    payload: error,
+})

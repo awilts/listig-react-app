@@ -5,6 +5,7 @@ import {
     CREATE_ITEM_STARTED,
     CREATE_ITEM_SUCCESS,
     ActionWithPayload,
+    CREATE_ITEM_ACTION,
 } from '../actions/actions'
 
 const myUrl = window.location.href
@@ -22,7 +23,7 @@ export function* createItem(action: ActionWithPayload) {
 
 function* createItemSaga() {
     // @ts-ignore
-    yield takeEvery('CREATE_ITEM', createItem)
+    yield takeEvery(CREATE_ITEM_ACTION().type, createItem)
 }
 
 export default createItemSaga
