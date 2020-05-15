@@ -12,3 +12,7 @@ export type CreateItemAction = {
     type: string
     payload: Item
 }
+export type ReceivedItemAction = {
+    type: 'RECEIVED_ITEM'
+    payload: Item[]
+}

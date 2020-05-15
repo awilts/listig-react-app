@@ -3,6 +3,7 @@ import {
     CreateItemAction,
     CreateItemsSuccessAction,
     GetItemsSuccessAction,
+    ReceivedItemAction,
 } from './actionTypes'
 
 export const CREATE_ITEM = 'CREATE_ITEM'
@@ -49,4 +50,8 @@ export const getItemsFailureAction = (error: any) => ({
 export const SUBSCRIBE_TO_ITEMS = 'SUBSCRIBE_TO_ITEMS'
 export const subscribeToItemsAction = () => ({
     type: SUBSCRIBE_TO_ITEMS,
+})
+export const receivedItemAction = (item: Item): ReceivedItemAction => ({
+    type: 'RECEIVED_ITEM',
+    payload: [item],
 })

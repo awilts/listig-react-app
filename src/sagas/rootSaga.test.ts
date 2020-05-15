@@ -9,7 +9,7 @@ import getItemsSaga from './getItemsSaga'
 import createItemSaga from './createItemSaga'
 import axios from 'axios'
 import { generateItem } from '../test/utils/generators'
-import { subscribeToItems } from './subcribeToItems'
+import { subscribeToItems } from './subscribeToItemsSaga'
 
 jest.mock('axios')
 

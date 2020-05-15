@@ -1,9 +1,9 @@
 import itemApp from './root-reducer'
 import { Item } from '../types/Item'
-import { wsReceivedItem } from '../sagas/subcribeToItems'
 import {
     createItemSuccessAction,
     getItemsSuccessAction,
+    receivedItemAction,
 } from '../actions/actions'
 
 const testItem: Item = {
@@ -53,7 +53,7 @@ describe('action CREATE_ITEM_SUCCESS', () => {
 
 describe('action RECEIVED_ITEM', () => {
     it('should add an item to an empty state', () => {
-        const resultingState = itemApp(undefined, wsReceivedItem(testItem))
+        const resultingState = itemApp(undefined, receivedItemAction(testItem))
 
         const expectedState = { items: [testItem] }
         expect(resultingState).toEqual(expectedState)
@@ -63,7 +63,10 @@ describe('action RECEIVED_ITEM', () => {
         const initialState = { items: [testItem] }
         const newItem = Object.assign({}, testItem, { messageId: 'mId2' })
 
-        const resultingState = itemApp(initialState, wsReceivedItem(newItem))
+        const resultingState = itemApp(
+            initialState,
+            receivedItemAction(newItem)
+        )
 
         const expectedState = { items: [testItem, newItem] }
         expect(resultingState).toEqual(expectedState)
@@ -73,7 +76,10 @@ describe('action RECEIVED_ITEM', () => {
         const initialState = { items: [testItem] }
         const newItem = Object.assign({}, testItem)
 
-        const resultingState = itemApp(initialState, wsReceivedItem(newItem))
+        const resultingState = itemApp(
+            initialState,
+            receivedItemAction(newItem)
+        )
 
         const expectedState = { items: [testItem] }
         expect(resultingState).toEqual(expectedState)

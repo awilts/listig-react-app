@@ -6,8 +6,7 @@ import { Provider } from 'react-redux'
 import ItemOverview from './ItemOverview'
 import { initialState } from '../store/root-reducer'
 import { generateItem } from '../test/utils/generators'
-import { SUBSCRIBE_ITEMS_ACTION } from '../sagas/subcribeToItems'
-import { getItemsAction } from '../actions/actions'
+import { getItemsAction, subscribeToItemsAction } from '../actions/actions'
 
 const mockStore = configureStore([])
 
@@ -21,7 +20,7 @@ describe('ItemOverview', () => {
         )
         const actions = store.getActions()
         expect(actions).toHaveLength(2)
-        expect(actions).toContainEqual(SUBSCRIBE_ITEMS_ACTION)
+        expect(actions).toContainEqual(subscribeToItemsAction())
         expect(actions).toContainEqual(getItemsAction())
     })
 

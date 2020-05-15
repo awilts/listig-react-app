@@ -3,15 +3,14 @@ import ItemList from './ItemList'
 import CreateItemForm from './CreateItemForm'
 import ClearItemsButton from './ClearItemsButton'
 import { useDispatch } from 'react-redux'
-import { SUBSCRIBE_ITEMS_ACTION } from '../sagas/subcribeToItems'
-import { getItemsAction } from '../actions/actions'
+import { getItemsAction, subscribeToItemsAction } from '../actions/actions'
 
 const ItemOverview: FC = () => {
     const dispatch = useDispatch()
 
     useEffect(() => {
         dispatch(getItemsAction())
-        dispatch(SUBSCRIBE_ITEMS_ACTION)
+        dispatch(subscribeToItemsAction())
     }, [dispatch])
 
     return (
