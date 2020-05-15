@@ -13,7 +13,7 @@ const postUrl = `${myUrl}backend/items`
 export const GET_ITEMS_ACTION = { type: 'GET_ITEMS' }
 export const GET_ITEMS_STARTED = { type: 'GET_ITEMS_STARTED' }
 
-function* getItems() {
+export function* getItems() {
     yield put(GET_ITEMS_STARTED)
     try {
         const result = yield call(axios.get, postUrl)
@@ -28,7 +28,7 @@ export const GET_ITEMS_SUCCESS = (items: Item[]): GET_ITEMS_SUCCESS_TYPE => ({
     payload: items,
 })
 
-const GET_ITEMS_FAILURE = (error: any) => ({
+export const GET_ITEMS_FAILURE = (error: any) => ({
     type: 'GET_ITEMS_FAILURE',
     payload: error,
 })
