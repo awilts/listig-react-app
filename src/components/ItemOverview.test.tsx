@@ -4,34 +4,32 @@ import '@testing-library/jest-dom/extend-expect'
 import ItemOverview from './ItemOverview'
 import { getItems } from '../api/itemApi'
 import { generateItem } from '../test/utils/generators'
+import { mocked } from 'ts-jest/utils'
 
 jest.mock('../api/itemApi')
+const mockedGetItems = mocked(getItems)
 
 afterEach(() => {
     jest.resetAllMocks()
 })
 
 test('ItemOverview receives 1 item from backend', async () => {
-    const testItem = generateItem()
-    // @ts-ignore
-    getItems.mockResolvedValueOnce([testItem])
+    mockedGetItems.mockResolvedValueOnce([generateItem()])
 
     const itemOverview = render(<ItemOverview />)
-    expect(getItems).toHaveBeenCalledTimes(1)
 
-    // @ts-ignore
+    expect(getItems).toHaveBeenCalledTimes(1)
     await waitFor(() =>
         expect(itemOverview.queryAllByRole('listitem')).toHaveLength(1)
     )
 })
 
 test('ItemOverview receives 0 items from backend', async () => {
-    // @ts-ignore
-    getItems.mockResolvedValueOnce([])
+    mockedGetItems.mockResolvedValueOnce([])
 
     const itemOverview = render(<ItemOverview />)
-    expect(getItems).toHaveBeenCalledTimes(1)
 
+    expect(getItems).toHaveBeenCalledTimes(1)
     await waitFor(() =>
         expect(itemOverview.queryAllByRole('listitem')).toHaveLength(0)
     )
