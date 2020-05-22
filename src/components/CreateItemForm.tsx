@@ -1,11 +1,9 @@
 import React, { FC, useState } from 'react'
 import { Item } from '../types/Item'
-import { useDispatch } from 'react-redux'
-import { createItemAction } from '../actions/actions'
+import axios from 'axios'
 
 const CreateItemForm: FC = () => {
     const [newItemText, setNewItemText] = useState<string>('')
-    let dispatch = useDispatch()
 
     function createItem(event: any) {
         event.preventDefault()
@@ -14,8 +12,14 @@ const CreateItemForm: FC = () => {
             userId: 'uid',
             text: newItemText,
         }
-        dispatch(createItemAction(item))
+        createItemRequest(item).then((res) => console.log(res))
         setNewItemText('')
+    }
+
+    const createItemRequest = async (payload: Item) => {
+        const myUrl = window.location.href
+        const postUrl = `${myUrl}backend/items`
+        return axios.post(postUrl, payload)
     }
 
     return (
