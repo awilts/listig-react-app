@@ -1,29 +1,23 @@
 import React, { FC, useState } from 'react'
 import { Item } from '../types/Item'
-import axios from 'axios'
+import { createItem } from '../api/itemApi'
 
 const CreateItemForm: FC = () => {
     const [newItemText, setNewItemText] = useState<string>('')
 
-    function createItem(event: any) {
+    function handleCreateItem(event: any) {
         event.preventDefault()
         const item: Item = {
             groupId: 'gid',
             userId: 'uid',
             text: newItemText,
         }
-        createItemRequest(item).then((res) => console.log(res))
+        createItem(item).then((res) => console.log(res))
         setNewItemText('')
     }
 
-    const createItemRequest = async (payload: Item) => {
-        const myUrl = window.location.href
-        const postUrl = `${myUrl}backend/items`
-        return axios.post(postUrl, payload)
-    }
-
     return (
-        <form onSubmit={createItem}>
+        <form onSubmit={handleCreateItem}>
             <input
                 type="text"
                 value={newItemText}
