@@ -1,10 +1,12 @@
 import React, { FC } from 'react'
-import { ItemState } from '../store/root-reducer'
-import { useSelector } from 'react-redux'
+import { Item } from '../types/Item'
 
-const ItemList: FC = () => {
-    const items = useSelector((state: ItemState) => state.items)
+type Props = {
+    items: Item[]
+}
 
+const ItemList: FC<Props> = (props) => {
+    const items = props.items
     const listItems = items.map((item) => (
         <li key={item.messageId}>{item.text}</li>
     ))

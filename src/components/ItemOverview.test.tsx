@@ -1,64 +1,38 @@
 import React from 'react'
-import { render } from '@testing-library/react'
+import { render, waitFor } from '@testing-library/react'
 import '@testing-library/jest-dom/extend-expect'
-import configureStore from 'redux-mock-store'
-import { Provider } from 'react-redux'
 import ItemOverview from './ItemOverview'
-import { initialState } from '../store/root-reducer'
+import { getItems } from '../api/itemApi'
 import { generateItem } from '../test/utils/generators'
-import { getItemsAction, subscribeToItemsAction } from '../actions/actions'
 
-const mockStore = configureStore([])
+jest.mock('../api/itemApi')
 
-describe('ItemOverview', () => {
-    it('queries and subscribes to item backends', () => {
-        const store = mockStore(initialState)
-        render(
-            <Provider store={store}>
-                <ItemOverview />
-            </Provider>
-        )
-        const actions = store.getActions()
-        expect(actions).toHaveLength(2)
-        expect(actions).toContainEqual(subscribeToItemsAction())
-        expect(actions).toContainEqual(getItemsAction())
-    })
+afterEach(() => {
+    jest.resetAllMocks()
+})
 
-    it('renders the item creation dialog', () => {
-        const store = mockStore(initialState)
-        const itemOverview = render(
-            <Provider store={store}>
-                <ItemOverview />
-            </Provider>
-        )
-        const submitButton = itemOverview.getByRole('button', {
-            name: 'submit',
-        })
-        expect(submitButton).not.toBeNull()
-    })
+test('ItemOverview receives 1 item from backend', async () => {
+    const testItem = generateItem()
+    // @ts-ignore
+    getItems.mockResolvedValueOnce([testItem])
 
-    it('renders no items with the default state', () => {
-        const store = mockStore(initialState)
-        const itemOverview = render(
-            <Provider store={store}>
-                <ItemOverview />
-            </Provider>
-        )
-        const listElements = itemOverview.queryAllByRole('listitem')
-        expect(listElements).toHaveLength(0)
-    })
+    const itemOverview = render(<ItemOverview />)
+    expect(getItems).toHaveBeenCalledTimes(1)
 
-    it('renders one item', () => {
-        const state = Object.assign({}, initialState)
-        const item = generateItem()
-        state.items.push(item)
-        const store = mockStore(state)
-        const itemOverview = render(
-            <Provider store={store}>
-                <ItemOverview />
-            </Provider>
-        )
-        const listElements = itemOverview.queryAllByRole('listitem')
-        expect(listElements).toHaveLength(1)
-    })
+    // @ts-ignore
+    await waitFor(() =>
+        expect(itemOverview.queryAllByRole('listitem')).toHaveLength(1)
+    )
+})
+
+test('ItemOverview receives 0 items from backend', async () => {
+    // @ts-ignore
+    getItems.mockResolvedValueOnce([])
+
+    const itemOverview = render(<ItemOverview />)
+    expect(getItems).toHaveBeenCalledTimes(1)
+
+    await waitFor(() =>
+        expect(itemOverview.queryAllByRole('listitem')).toHaveLength(0)
+    )
 })

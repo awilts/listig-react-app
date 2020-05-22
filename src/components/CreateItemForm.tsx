@@ -1,25 +1,23 @@
 import React, { FC, useState } from 'react'
 import { Item } from '../types/Item'
-import { useDispatch } from 'react-redux'
-import { createItemAction } from '../actions/actions'
+import { createItem } from '../api/itemApi'
 
 const CreateItemForm: FC = () => {
     const [newItemText, setNewItemText] = useState<string>('')
-    let dispatch = useDispatch()
 
-    function createItem(event: any) {
+    function handleCreateItem(event: any) {
         event.preventDefault()
         const item: Item = {
             groupId: 'gid',
             userId: 'uid',
             text: newItemText,
         }
-        dispatch(createItemAction(item))
+        createItem(item).then((res) => console.log(res))
         setNewItemText('')
     }
 
     return (
-        <form onSubmit={createItem}>
+        <form onSubmit={handleCreateItem}>
             <input
                 type="text"
                 value={newItemText}
