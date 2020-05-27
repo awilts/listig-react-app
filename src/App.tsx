@@ -1,11 +1,11 @@
 import React, { FC } from 'react'
 import './App.css'
-import ItemOverview from './components/ItemOverview'
+import Authentication from './components/Authentication'
 
 const App: FC = () => {
     return (
         <div>
-            <ItemOverview />
+            <Authentication />
         </div>
     )
 }
