@@ -1,35 +1,34 @@
-import axios from 'axios'
 import { Item } from '../types/Item'
+import * as firebase from 'firebase/app'
+import 'firebase/firestore'
 
-const myUrl = window.location.href
-const itemUrl = `${myUrl}backend/items`
+console.log('fii')
+const conf = require('../devlocal').conf
+const config = {
+    apiKey: conf.apiKey,
+    authDomain: conf.authDomain,
+    projectId: conf.projectId,
+}
+firebase.initializeApp(config)
+
+const db = firebase.firestore()
 
 export const getItems = async (): Promise<Item[]> => {
-    const result = await axios.get(itemUrl)
-    return result.data
+    const querySnapshot = await db.collection('items').get()
+    return querySnapshot.docs.map((doc) => parseItem(doc))
 }
 
-export const createItem = async (item: Item): Promise<Item[]> => {
-    const result = await axios.post(itemUrl, item)
-    return result.data
+const parseItem = (doc: firebase.firestore.QueryDocumentSnapshot): Item => {
+    const data = doc.data()
+    return {
+        userId: data['userId'],
+        groupId: data['groupId'],
+        text: data['text'],
+        messageId: doc.id,
+    }
 }
 
-export const subscribeToItems = (callback: (item: Item) => void) => {
-    const myHostname = window.location.hostname
-    const ws = new WebSocket(`ws://${myHostname}:8080/ws/items`)
-    ws.onclose = function (event) {
-        console.log(event)
-        throw new Error('closed')
-    }
-    ws.onopen = function (event) {
-        console.log(event)
-    }
-    ws.onerror = function (event) {
-        console.log(event)
-        throw new Error('error')
-    }
-    ws.onmessage = function (event) {
-        const item: Item = JSON.parse(event.data)
-        callback(item)
-    }
+export const createItem = async (item: Item): Promise<Item> => {
+    const result = await db.collection('items').add(item)
+    return { ...item, messageId: result.id }
 }

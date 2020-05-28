@@ -3,7 +3,7 @@ import ItemList from './ItemList'
 import CreateItemForm from './CreateItemForm'
 import ClearItemsButton from './ClearItemsButton'
 import { Item } from '../types/Item'
-import { getItems, subscribeToItems } from '../api/itemApi'
+import { getItems } from '../api/itemApi'
 
 const ItemOverview: FC = () => {
     const [items, setItems] = useState<Item[]>([])
@@ -16,7 +16,7 @@ const ItemOverview: FC = () => {
         getItems().then((value) => {
             setItems(value)
         })
-        subscribeToItems(itemReceived)
+        // subscribeToItems(itemReceived)
     }, [])
 
     return (

@@ -4,14 +4,6 @@ import * as firebase from 'firebase/app'
 import 'firebase/auth'
 import ItemOverview from './ItemOverview'
 
-const conf = require('../devlocal').conf
-
-const config = {
-    apiKey: conf.apiKey,
-    authDomain: conf.authDomain,
-}
-firebase.initializeApp(config)
-
 const Authentication: FC = (props) => {
     const [signedIn, setSignedIn] = useState<boolean>(false)
 
