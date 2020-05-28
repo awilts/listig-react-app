@@ -41,7 +41,7 @@ const Authentication: FC = (props) => {
         <div>
             <p>Welcome {displayName}! You are now signed-in!</p>
             <button onClick={() => firebase.auth().signOut()}>Sign-out</button>
-            <ItemOverview />
+            {props.children}
         </div>
     )
 }
