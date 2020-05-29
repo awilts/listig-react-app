@@ -4,32 +4,29 @@ import '@testing-library/jest-dom/extend-expect'
 import ItemOverview from './ItemOverview'
 import { generateItem } from '../test/utils/generators'
 import { mocked } from 'ts-jest/utils'
+import { useSelector } from 'react-redux'
+import { Item } from '../types/Item'
 
-// jest.mock('../api/itemApi')
-// const mockedGetItems = mocked(getItems)
+jest.mock('react-redux')
+const mockedUseSelector = mocked(useSelector)
 
 afterEach(() => {
     jest.resetAllMocks()
 })
 
 test('ItemOverview receives 1 item from backend', async () => {
-    // mockedGetItems.mockResolvedValueOnce([generateItem()])
-    //
-    // const itemOverview = render(<ItemOverview />)
-    //
-    // expect(getItems).toHaveBeenCalledTimes(1)
-    // await waitFor(() =>
-    //     expect(itemOverview.queryAllByRole('listitem')).toHaveLength(1)
-    // )
+    const item: Item = generateItem()
+    mockedUseSelector.mockReturnValue([item])
+    const itemOverview = render(<ItemOverview />)
+    await waitFor(() =>
+        expect(itemOverview.queryAllByRole('listitem')).toHaveLength(1)
+    )
 })
 
 test('ItemOverview receives 0 items from backend', async () => {
-    // mockedGetItems.mockResolvedValueOnce([])
-    //
-    // const itemOverview = render(<ItemOverview />)
-    //
-    // expect(getItems).toHaveBeenCalledTimes(1)
-    // await waitFor(() =>
-    //     expect(itemOverview.queryAllByRole('listitem')).toHaveLength(0)
-    // )
+    mockedUseSelector.mockReturnValue([])
+    const itemOverview = render(<ItemOverview />)
+    await waitFor(() =>
+        expect(itemOverview.queryAllByRole('listitem')).toHaveLength(0)
+    )
 })
