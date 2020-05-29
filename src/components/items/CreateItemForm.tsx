@@ -1,5 +1,5 @@
 import React, { FC, useState } from 'react'
-import { Item } from '../types/Item'
+import { Item } from '../../types/Item'
 import { useFirestore } from 'react-redux-firebase'
 
 const CreateItemForm: FC = () => {

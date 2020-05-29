@@ -1,5 +1,5 @@
 import React, { FC } from 'react'
-import { Item } from '../types/Item'
+import { Item } from '../../types/Item'
 
 type Props = {
     items: Item[]

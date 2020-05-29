@@ -1,7 +1,7 @@
 import React, { FC } from 'react'
 import './App.css'
 import Authentication from './components/Authentication'
-import ItemOverview from './components/ItemOverview'
+import ItemOverview from './components/items/ItemOverview'
 import { Provider } from 'react-redux'
 import firebase from 'firebase/app'
 import 'firebase/auth'
@@ -13,6 +13,7 @@ import {
 } from 'react-redux-firebase'
 import { createFirestoreInstance, firestoreReducer } from 'redux-firestore'
 import { initialState } from './store/state'
+import CodeguideGame from './components/codeguide/CodeguideGame'
 
 const conf = require('./devlocal').conf
 const fbConfig = {
@@ -48,13 +49,17 @@ const rrfProps = {
     createFirestoreInstance,
 }
 
+const showItems = false
+const showCodeguide = true
+
 const App: FC = () => {
     return (
         <div>
             <Provider store={store}>
                 <ReactReduxFirebaseProvider {...rrfProps}>
                     <Authentication>
-                        <ItemOverview />
+                        {showItems ? <ItemOverview /> : <div />}
+                        {showCodeguide ? <CodeguideGame /> : <div />}
                     </Authentication>
                 </ReactReduxFirebaseProvider>
             </Provider>

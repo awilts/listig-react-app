@@ -2,10 +2,10 @@ import React from 'react'
 import { render, waitFor } from '@testing-library/react'
 import '@testing-library/jest-dom/extend-expect'
 import ItemOverview from './ItemOverview'
-import { generateItem } from '../test/utils/generators'
+import { generateItem } from '../../test/utils/generators'
 import { mocked } from 'ts-jest/utils'
 import { useSelector } from 'react-redux'
-import { Item } from '../types/Item'
+import { Item } from '../../types/Item'
 
 jest.mock('react-redux')
 const mockedUseSelector = mocked(useSelector)
