@@ -1,6 +1,6 @@
 import React, { FC } from 'react'
 import { Word } from '../../types/Word'
-import { Box, Grid, Paper } from '@material-ui/core'
+import { Grid, Paper } from '@material-ui/core'
 import CodeguideCard from './CodeguideCard'
 import { makeStyles } from '@material-ui/core/styles'
 
