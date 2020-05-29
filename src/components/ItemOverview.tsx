@@ -4,11 +4,11 @@ import CreateItemForm from './CreateItemForm'
 import ClearItemsButton from './ClearItemsButton'
 import { useFirestoreConnect } from 'react-redux-firebase'
 import { useSelector } from 'react-redux'
+import { State } from '../store/state'
 
 const ItemOverview: FC = () => {
     useFirestoreConnect('items')
-    // @ts-ignore
-    const items = useSelector((state) => state.firestore.ordered.items)
+    const items = useSelector((state: State) => state.firestore.ordered.items)
 
     return (
         <>

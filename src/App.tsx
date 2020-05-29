@@ -12,6 +12,7 @@ import {
     firebaseReducer,
 } from 'react-redux-firebase'
 import { createFirestoreInstance, firestoreReducer } from 'redux-firestore'
+import { initialState } from './store/state'
 
 const conf = require('./devlocal').conf
 const fbConfig = {
@@ -33,7 +34,6 @@ const rootReducer = combineReducers({
     firestore: firestoreReducer,
 })
 
-const initialState = {}
 const store = createStore(
     rootReducer,
     initialState,
