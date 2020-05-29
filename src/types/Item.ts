@@ -1,4 +1,4 @@
-export interface Item {
+export type Item = {
     messageId?: string
     groupId: string
     userId: string

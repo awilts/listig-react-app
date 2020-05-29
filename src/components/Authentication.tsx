@@ -2,7 +2,6 @@ import React, { FC, useEffect, useState } from 'react'
 import { StyledFirebaseAuth } from 'react-firebaseui'
 import * as firebase from 'firebase/app'
 import 'firebase/auth'
-import ItemOverview from './ItemOverview'
 
 const Authentication: FC = (props) => {
     const [signedIn, setSignedIn] = useState<boolean>(false)
@@ -20,7 +19,6 @@ const Authentication: FC = (props) => {
 
     useEffect(() => {
         firebase.auth().onAuthStateChanged((user) => {
-            console.log(user)
             setSignedIn(!!user)
         })
     }, [])
