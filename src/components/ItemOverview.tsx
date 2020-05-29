@@ -1,23 +1,14 @@
-import React, { FC, useEffect, useState } from 'react'
+import React, { FC } from 'react'
 import ItemList from './ItemList'
 import CreateItemForm from './CreateItemForm'
 import ClearItemsButton from './ClearItemsButton'
-import { Item } from '../types/Item'
-import { getItems } from '../api/itemApi'
+import { useFirestoreConnect } from 'react-redux-firebase'
+import { useSelector } from 'react-redux'
 
 const ItemOverview: FC = () => {
-    const [items, setItems] = useState<Item[]>([])
-
-    // const itemReceived = (item: Item) => {
-    //     setItems((prevItems) => [...prevItems, item])
-    // }
-
-    useEffect(() => {
-        getItems().then((value) => {
-            setItems(value)
-        })
-        // subscribeToItems(itemReceived)
-    }, [])
+    useFirestoreConnect('items')
+    // @ts-ignore
+    const items = useSelector((state) => state.firestore.ordered.items)
 
     return (
         <>

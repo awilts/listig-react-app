@@ -7,9 +7,8 @@ type Props = {
 
 const ItemList: FC<Props> = (props) => {
     const items = props.items
-    const listItems = items.map((item) => (
-        <li key={item.messageId}>{item.text}</li>
-    ))
+    const listItems =
+        items && items.map((item) => <li key={item.id}>{item.text}</li>)
     return <ul>{listItems}</ul>
 }
 

@@ -1,5 +1,5 @@
 export type Item = {
-    messageId?: string
+    id?: string
     groupId: string
     userId: string
     text: string

@@ -2,8 +2,8 @@ import { Item } from '../../types/Item'
 
 export const generateItem = (): Item => {
     return {
+        id: 'mid',
         userId: 'uid',
-        messageId: 'mid',
         groupId: 'gid',
         text: 'testItem',
     }

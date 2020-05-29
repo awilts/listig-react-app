@@ -1,9 +1,19 @@
 import React, { FC, useState } from 'react'
 import { Item } from '../types/Item'
-import { createItem } from '../api/itemApi'
+import { useFirestore } from 'react-redux-firebase'
 
 const CreateItemForm: FC = () => {
     const [newItemText, setNewItemText] = useState<string>('')
+
+    const firestore = useFirestore()
+    const addItemToDb = (item: Item) => {
+        firestore
+            .collection('items')
+            .add(item)
+            .then((docRef) => {
+                console.log(docRef)
+            })
+    }
 
     function handleCreateItem(event: any) {
         event.preventDefault()
@@ -12,7 +22,7 @@ const CreateItemForm: FC = () => {
             userId: 'uid',
             text: newItemText,
         }
-        createItem(item).then((res) => console.log(res))
+        addItemToDb(item)
         setNewItemText('')
     }
 
