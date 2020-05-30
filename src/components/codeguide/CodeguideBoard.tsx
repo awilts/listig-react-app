@@ -10,7 +10,8 @@ type Props = {
 
 const useStyles = makeStyles({
     root: {
-        margin: 20,
+        flexGrow: 1,
+        padding: 20,
     },
 })
 const CodeguideBoard: FC<Props> = (props) => {
@@ -18,9 +19,11 @@ const CodeguideBoard: FC<Props> = (props) => {
     const WordList = words && words.map((word) => <CodeguideCard word={word} />)
     const classes = useStyles()
     return (
-        <Paper className={classes.root}>
-            <Grid container>{WordList}</Grid>
-        </Paper>
+        <div className={classes.root}>
+            <Grid container spacing={3}>
+                {WordList}
+            </Grid>
+        </div>
     )
 }
 

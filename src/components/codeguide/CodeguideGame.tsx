@@ -5,6 +5,8 @@ import { State } from '../../store/state'
 import CodeguideBoard from './CodeguideBoard'
 import { Word } from '../../types/Word'
 import StartGameButton from './StartGameButton'
+import PlayerList from './PlayerList'
+import { Player } from '../../types/Player'
 
 const CodeguideGame: FC = () => {
     useFirestoreConnect('words')
@@ -12,8 +14,14 @@ const CodeguideGame: FC = () => {
         (state: State) => state.firestore.ordered.words
     )
 
+    useFirestoreConnect('players')
+    const players: Player[] = useSelector(
+        (state: State) => state.firestore.ordered.players
+    )
+
     return (
         <>
+            <PlayerList players={players} />
             <CodeguideBoard words={words} />
             <StartGameButton words={words} />
         </>

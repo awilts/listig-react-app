@@ -2,6 +2,7 @@ import React, { FC } from 'react'
 import { Button } from '@material-ui/core'
 import { useFirestore } from 'react-redux-firebase'
 import { Word } from '../../types/Word'
+import { Player } from '../../types/Player'
 
 type Props = {
     words: Word[]
@@ -15,11 +16,21 @@ const StartGameButton: FC<Props> = (props) => {
         }
     }
 
+    const deletePlayer = (player: Player) => {
+        if (player.id != null) {
+            firestore.collection('players').doc(player.id).delete()
+        }
+    }
+
     const addWord = (word: Word) => {
         firestore.collection('words').add(word)
     }
 
-    const doSth = () => {
+    const addPlayer = (player: Player) => {
+        firestore.collection('players').add(player)
+    }
+
+    const resetGame = () => {
         props.words.forEach((word) => {
             deleteWord(word)
         })
@@ -44,10 +55,13 @@ const StartGameButton: FC<Props> = (props) => {
         addWord({ text: 'Bauer', boardId: 17 })
         addWord({ text: 'Scheune', boardId: 18 })
         addWord({ text: 'Milch', boardId: 19 })
+
+        deletePlayer({ id: 'someUniqueUserId', name: 'alex' })
+        addPlayer({ id: 'someUniqueUserId', name: 'alex' })
     }
 
     return (
-        <Button onClick={doSth} variant="contained" color="primary">
+        <Button onClick={resetGame} variant="contained" color="primary">
             Reset game
         </Button>
     )
