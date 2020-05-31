@@ -33,15 +33,7 @@ const Authentication: FC = (props) => {
             </div>
         )
     }
-    // @ts-ignore
-    const displayName = firebase.auth().currentUser.displayName
-    return (
-        <div>
-            <p>Welcome {displayName}! You are now signed-in!</p>
-            <button onClick={() => firebase.auth().signOut()}>Sign-out</button>
-            {props.children}
-        </div>
-    )
+    return <>{props.children}</>
 }
 
 export default Authentication
