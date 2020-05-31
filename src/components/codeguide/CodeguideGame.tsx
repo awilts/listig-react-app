@@ -9,6 +9,7 @@ import PlayerList from './PlayerList'
 import { Player } from '../../types/Player'
 import JoinGameButton from './JoinGameButton'
 import TestSecRule from './TestSecRule'
+import { Grid } from '@material-ui/core'
 
 const CodeguideGame: FC = () => {
     useFirestoreConnect('words')
@@ -22,13 +23,13 @@ const CodeguideGame: FC = () => {
     )
 
     return (
-        <>
+        <Grid container spacing={2}>
             <PlayerList players={players} />
             <CodeguideBoard words={words} />
             <StartGameButton words={words} />
             <JoinGameButton />
             <TestSecRule />
-        </>
+        </Grid>
     )
 }
 
