@@ -1,6 +1,6 @@
 import React, { FC } from 'react'
 import { Word } from '../../types/Word'
-import { Grid, Paper } from '@material-ui/core'
+import { Grid } from '@material-ui/core'
 import CodeguideCard from './CodeguideCard'
 import { makeStyles } from '@material-ui/core/styles'
 
@@ -16,7 +16,9 @@ const useStyles = makeStyles({
 })
 const CodeguideBoard: FC<Props> = (props) => {
     const words = props.words
-    const WordList = words && words.map((word) => <CodeguideCard word={word} />)
+    const WordList =
+        words &&
+        words.map((word) => <CodeguideCard key={word.boardId} word={word} />)
     const classes = useStyles()
     return (
         <div className={classes.root}>

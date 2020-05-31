@@ -1,4 +1,5 @@
 export type Player = {
-    id?: string
+    id: string
     name: string
+    chosenCard?: number
 }

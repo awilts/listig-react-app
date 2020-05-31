@@ -2,7 +2,7 @@ import React, { FC } from 'react'
 import { Button } from '@material-ui/core'
 import { useFirestore } from 'react-redux-firebase'
 import { Word } from '../../types/Word'
-import { Player } from '../../types/Player'
+import { CardColor } from '../../types/CardColor'
 
 type Props = {
     words: Word[]
@@ -16,18 +16,8 @@ const StartGameButton: FC<Props> = (props) => {
         }
     }
 
-    const deletePlayer = (player: Player) => {
-        if (player.id != null) {
-            firestore.collection('players').doc(player.id).delete()
-        }
-    }
-
     const addWord = (word: Word) => {
         firestore.collection('words').add(word)
-    }
-
-    const addPlayer = (player: Player) => {
-        firestore.collection('players').add(player)
     }
 
     const resetGame = () => {
@@ -35,29 +25,26 @@ const StartGameButton: FC<Props> = (props) => {
             deleteWord(word)
         })
 
-        addWord({ text: 'Kuh', boardId: 0 })
-        addWord({ text: 'Pferd', boardId: 1 })
-        addWord({ text: 'Hund', boardId: 2 })
-        addWord({ text: 'Katze', boardId: 3 })
-        addWord({ text: 'Schwein', boardId: 4 })
-        addWord({ text: 'Rind', boardId: 5 })
-        addWord({ text: 'Eber', boardId: 6 })
-        addWord({ text: 'Ferkel', boardId: 7 })
-        addWord({ text: 'Huhn', boardId: 8 })
-        addWord({ text: 'Ei', boardId: 9 })
-        addWord({ text: 'Elephant', boardId: 10 })
-        addWord({ text: 'Schaf', boardId: 11 })
-        addWord({ text: 'Lamm', boardId: 12 })
-        addWord({ text: 'Fohlen', boardId: 13 })
-        addWord({ text: 'Ziege', boardId: 14 })
-        addWord({ text: 'Hahn', boardId: 15 })
-        addWord({ text: 'Küken', boardId: 16 })
-        addWord({ text: 'Bauer', boardId: 17 })
-        addWord({ text: 'Scheune', boardId: 18 })
-        addWord({ text: 'Milch', boardId: 19 })
-
-        deletePlayer({ id: 'someUniqueUserId', name: 'alex' })
-        addPlayer({ id: 'someUniqueUserId', name: 'alex' })
+        addWord({ text: 'Kuh', boardId: 0, color: CardColor.red })
+        addWord({ text: 'Pferd', boardId: 1, color: CardColor.blue })
+        addWord({ text: 'Hund', boardId: 2, color: CardColor.unknown })
+        addWord({ text: 'Katze', boardId: 3, color: CardColor.unknown })
+        addWord({ text: 'Schwein', boardId: 4, color: CardColor.unknown })
+        addWord({ text: 'Rind', boardId: 5, color: CardColor.unknown })
+        addWord({ text: 'Eber', boardId: 6, color: CardColor.unknown })
+        addWord({ text: 'Ferkel', boardId: 7, color: CardColor.unknown })
+        addWord({ text: 'Huhn', boardId: 8, color: CardColor.unknown })
+        addWord({ text: 'Ei', boardId: 9, color: CardColor.unknown })
+        addWord({ text: 'Elephant', boardId: 10, color: CardColor.unknown })
+        addWord({ text: 'Schaf', boardId: 11, color: CardColor.unknown })
+        addWord({ text: 'Lamm', boardId: 12, color: CardColor.unknown })
+        addWord({ text: 'Fohlen', boardId: 13, color: CardColor.unknown })
+        addWord({ text: 'Ziege', boardId: 14, color: CardColor.unknown })
+        addWord({ text: 'Hahn', boardId: 15, color: CardColor.unknown })
+        addWord({ text: 'Küken', boardId: 16, color: CardColor.unknown })
+        addWord({ text: 'Bauer', boardId: 17, color: CardColor.unknown })
+        addWord({ text: 'Scheune', boardId: 18, color: CardColor.unknown })
+        addWord({ text: 'Milch', boardId: 19, color: CardColor.unknown })
     }
 
     return (

@@ -7,6 +7,8 @@ import { Word } from '../../types/Word'
 import StartGameButton from './StartGameButton'
 import PlayerList from './PlayerList'
 import { Player } from '../../types/Player'
+import JoinGameButton from './JoinGameButton'
+import TestSecRule from './TestSecRule'
 
 const CodeguideGame: FC = () => {
     useFirestoreConnect('words')
@@ -24,6 +26,8 @@ const CodeguideGame: FC = () => {
             <PlayerList players={players} />
             <CodeguideBoard words={words} />
             <StartGameButton words={words} />
+            <JoinGameButton />
+            <TestSecRule />
         </>
     )
 }
