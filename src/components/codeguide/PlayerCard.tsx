@@ -2,6 +2,7 @@ import React, { FC } from 'react'
 import { Card } from '@material-ui/core'
 import { Player } from '../../types/Player'
 import Grid from '@material-ui/core/Grid'
+import Typography from '@material-ui/core/Typography'
 
 type Props = {
     player: Player
@@ -10,7 +11,9 @@ type Props = {
 const PlayerCard: FC<Props> = (props) => {
     return (
         <Grid item xs={12}>
-            <Card>{props.player.name}</Card>
+            <Card>
+                <Typography>{props.player.name}</Typography>
+            </Card>
         </Grid>
     )
 }

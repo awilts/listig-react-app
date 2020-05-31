@@ -16,7 +16,7 @@ const TestSecRule: FC = () => {
         (state: State) => state.firebase.auth
     )
 
-    const changeUser = async () => {
+    const doSth = async () => {
         const res = await firestore
             .collection('players')
             .where('uid', '==', user.uid)
@@ -29,8 +29,8 @@ const TestSecRule: FC = () => {
     }
 
     return (
-        <Button onClick={changeUser} variant="contained" color="primary">
-            Test rule
+        <Button onClick={doSth} variant="contained" color="primary">
+            Finish Round
         </Button>
     )
 }
