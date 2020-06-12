@@ -1,6 +1,8 @@
 import { Item } from '../types/Item'
 import { Word } from '../types/Word'
 import { Player } from '../types/Player'
+import { WordOwner } from '../types/WordOwner'
+import { Hint } from '../types/Hint'
 
 export const initialState: State = {
     firestore: {
@@ -8,6 +10,8 @@ export const initialState: State = {
             items: [],
             words: [],
             players: [],
+            wordOwners: [],
+            hints: [],
         },
     },
 }
@@ -18,6 +22,8 @@ export type State = {
             items: Item[]
             words: Word[]
             players: Player[]
+            hints: Hint[]
+            wordOwners: WordOwner[]
         }
     }
 }

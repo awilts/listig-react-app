@@ -18,7 +18,13 @@ const JoinGameButton: FC = () => {
     }
 
     const joinGame = () => {
-        addPlayer({ id: user.uid, name: user.displayName })
+        addPlayer({
+            id: user.uid,
+            name: user.displayName,
+            color: '',
+            team: '',
+            vote: '',
+        })
     }
 
     return (

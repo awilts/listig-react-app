@@ -43,7 +43,7 @@ const CodeguideCard: FC<Props> = (props) => {
     const word = props.word
 
     const playersOnThisCard = players.filter(
-        (player) => player.chosenCard === word.boardId
+        (player) => player.vote === word.boardId
     )
 
     const voteForCard = () => {
@@ -54,7 +54,7 @@ const CodeguideCard: FC<Props> = (props) => {
             .update({ chosenCard: word.boardId })
     }
 
-    const color = word.color
+    const color = word.team
 
     return (
         <Grid item xs={6} sm={3}>

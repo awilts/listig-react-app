@@ -1,5 +1,7 @@
 export type Player = {
-    id: string
+    id?: string
     name: string
-    chosenCard?: number
+    vote: string
+    color: string
+    team: string
 }
