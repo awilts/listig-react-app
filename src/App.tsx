@@ -6,6 +6,7 @@ import { Provider } from 'react-redux'
 import firebase from 'firebase/app'
 import 'firebase/auth'
 import 'firebase/firestore'
+import 'firebase/functions'
 import { createStore, combineReducers } from 'redux'
 import {
     ReactReduxFirebaseProvider,
@@ -29,7 +30,17 @@ const rrfConfig = {
 }
 
 firebase.initializeApp(fbConfig)
+firebase.functions()
 firebase.firestore()
+// @ts-ignore
+console.log('foo: ' + window.location.hostname)
+if (window.location.hostname === 'localhost') {
+    firebase.firestore().settings({
+        host: 'localhost:8080',
+        ssl: false,
+    })
+    firebase.functions().useFunctionsEmulator('http://localhost:5001')
+}
 
 const rootReducer = combineReducers({
     firebase: firebaseReducer,

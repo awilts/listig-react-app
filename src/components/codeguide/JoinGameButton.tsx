@@ -1,29 +1,22 @@
 import React, { FC } from 'react'
 import { Button } from '@material-ui/core'
-import { useFirestore } from 'react-redux-firebase'
-import { Player } from '../../types/Player'
-import { useSelector } from 'react-redux'
-import { State } from '../../store/state'
-import { Auth } from '../../types/Auth'
-import { omit } from 'lodash'
+import { useFirebase } from 'react-redux-firebase'
+import { functions } from 'firebase'
 
 const JoinGameButton: FC = () => {
-    const firestore = useFirestore()
+    const firebase = useFirebase()
+    const joinGameWeb = firebase
+        // @ts-ignore
+        .functions()
+        .httpsCallable('joinGame')
 
-    // @ts-ignore
-    const user: Auth = useSelector((state: State) => state.firebase.auth)
-
-    const addPlayer = (player: Player) => {
-        firestore.collection('players').doc(player.id).set(omit(player, 'id'))
-    }
-
-    const joinGame = () => {
-        addPlayer({
-            id: user.uid,
-            name: user.displayName,
-            color: '',
-            team: '',
-            vote: '',
+    const joinGame = async () => {
+        const lobbyId = 'GeyDTo9SUstY3JhlofJj'
+        joinGameWeb({ lobbyId }).then(function (
+            result: functions.HttpsCallableResult
+        ) {
+            const sanitizedMessage = result.data
+            console.log(sanitizedMessage)
         })
     }
 

@@ -7,10 +7,10 @@ import clsx from 'clsx'
 import { CardColor } from '../../types/CardColor'
 import { useSelector } from 'react-redux'
 import { State } from '../../store/state'
-import { Auth } from '../../types/Auth'
-import { useFirestore } from 'react-redux-firebase'
+import { useFirebase } from 'react-redux-firebase'
 import { Player } from '../../types/Player'
 import { AvatarBar } from './AvatarBar'
+import { functions } from 'firebase'
 
 type Props = {
     word: Word
@@ -33,10 +33,27 @@ const useStyles = makeStyles((theme: Theme) =>
 )
 const CodeguideCard: FC<Props> = (props) => {
     const classes = useStyles()
-    const firestore = useFirestore()
 
-    // @ts-ignore
-    const user: Auth = useSelector((state: State) => state.firebase.auth)
+    const firebase = useFirebase()
+    const changeVote = firebase
+        // @ts-ignore
+        .functions()
+        .httpsCallable('changeVote')
+
+    const voteForCard = async () => {
+        const lobbyId = 'GeyDTo9SUstY3JhlofJj'
+        console.log({ word })
+        console.log(`voting for card ${word.text}`)
+        changeVote({ vote: word.id, lobbyId }).then(function (
+            result: functions.HttpsCallableResult
+        ) {
+            // Read result of the Cloud Function.
+            const sanitizedMessage = result.data
+            // ...
+            console.log(sanitizedMessage)
+        })
+    }
+
     const players: Player[] = useSelector(
         (state: State) => state.firestore.ordered.players
     )
@@ -45,14 +62,6 @@ const CodeguideCard: FC<Props> = (props) => {
     const playersOnThisCard = players.filter(
         (player) => player.vote === word.boardId
     )
-
-    const voteForCard = () => {
-        console.log(`voting for card ${word.text}`)
-        firestore
-            .collection('players')
-            .doc(user.uid)
-            .update({ chosenCard: word.boardId })
-    }
 
     const color = word.team
 
