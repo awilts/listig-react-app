@@ -141,11 +141,17 @@ const ResetGameButton: FC<Props> = (props) => {
                 .delete()
         }
     }
+
     function resetHints(hints: Hint[]) {
         hints.forEach((hint) => {
             deleteHint(hint)
         })
         addHint({ position: '0', team: 'red', text: 'some little hint' })
+        addHint({
+            position: '0',
+            team: 'blue',
+            text: 'some hint of other team',
+        })
     }
 
     function deleteWordOwner(wordOwner: WordOwner) {
@@ -185,6 +191,13 @@ const ResetGameButton: FC<Props> = (props) => {
         })
     }
 
+    function resetCurrentTeam() {
+        firestore
+            .collection('lobbies')
+            .doc('GeyDTo9SUstY3JhlofJj')
+            .update({ currentTeam: 'blue' })
+    }
+
     const resetGame = () => {
         console.log('resetting game')
         const propsCopy = JSON.parse(JSON.stringify(props))
@@ -192,6 +205,7 @@ const ResetGameButton: FC<Props> = (props) => {
         resetPlayers(propsCopy.players)
         resetHints(propsCopy.hints)
         resetWords(propsCopy.words)
+        resetCurrentTeam()
     }
 
     return (

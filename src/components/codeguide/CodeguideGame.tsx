@@ -12,6 +12,7 @@ import TestSecRule from './TestSecRule'
 import { Grid } from '@material-ui/core'
 import { WordOwner } from '../../types/WordOwner'
 import { Hint } from '../../types/Hint'
+import HintList from './HintList'
 
 const CodeguideGame: FC = () => {
     useFirestoreConnect({
@@ -55,18 +56,21 @@ const CodeguideGame: FC = () => {
     )
 
     return (
-        <Grid container spacing={2}>
-            <PlayerList players={players} />
-            <CodeguideBoard words={words} />
-            <ResetGameButton
-                hints={hints}
-                words={words}
-                players={players}
-                wordOwners={wordOwners}
-            />
-            <JoinGameButton />
-            <TestSecRule />
-        </Grid>
+        <>
+            <Grid container spacing={2}>
+                <PlayerList players={players} />
+                <CodeguideBoard words={words} />
+                <ResetGameButton
+                    hints={hints}
+                    words={words}
+                    players={players}
+                    wordOwners={wordOwners}
+                />
+                <JoinGameButton />
+                <TestSecRule />
+            </Grid>
+            <HintList hints={hints} />
+        </>
     )
 }
 
