@@ -7,7 +7,6 @@ import { Word } from '../../types/Word'
 import ResetGameButton from './ResetGameButton'
 import PlayerList from './PlayerList'
 import { Player } from '../../types/Player'
-import JoinGameButton from './JoinGameButton'
 import TestSecRule from './TestSecRule'
 import { Grid } from '@material-ui/core'
 import { WordOwner } from '../../types/WordOwner'
@@ -58,15 +57,15 @@ const CodeguideGame: FC = () => {
     return (
         <>
             <Grid container spacing={2}>
-                <PlayerList players={players} />
+                <PlayerList players={players} team={'blue'} />
                 <CodeguideBoard words={words} />
+                <PlayerList players={players} team={'red'} />
                 <ResetGameButton
                     hints={hints}
                     words={words}
                     players={players}
                     wordOwners={wordOwners}
                 />
-                <JoinGameButton />
                 <TestSecRule />
             </Grid>
             <HintList hints={hints} />

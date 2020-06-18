@@ -21,8 +21,8 @@ const CodeguideBoard: FC<Props> = (props) => {
         words.map((word) => <CodeguideCard key={word.boardId} word={word} />)
     const classes = useStyles()
     return (
-        <Grid item xs={10}>
-            <Box borderLeft={1}>
+        <Grid item xs={8}>
+            <Box borderLeft={1} borderRight={1}>
                 <div className={classes.root}>
                     <Grid container spacing={3}>
                         {WordList}
