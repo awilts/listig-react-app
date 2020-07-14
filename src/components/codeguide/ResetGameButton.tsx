@@ -207,6 +207,7 @@ const ResetGameButton: FC<Props> = (props) => {
             host: 'true',
             guide: 'true',
         }
+
         firestore
             .collection('lobbies')
             .doc('GeyDTo9SUstY3JhlofJj')
