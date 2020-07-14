@@ -7,6 +7,9 @@ import { Hint } from '../types/Hint'
 export const initialState: State = {
     firestore: {
         ordered: {
+            lobby: {
+                currentTeam: '',
+            },
             items: [],
             words: [],
             players: [],
@@ -19,6 +22,9 @@ export const initialState: State = {
 export type State = {
     firestore: {
         ordered: {
+            lobby: {
+                currentTeam: string
+            }
             items: Item[]
             words: Word[]
             players: Player[]

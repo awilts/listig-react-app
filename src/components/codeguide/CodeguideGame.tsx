@@ -7,11 +7,10 @@ import { Word } from '../../types/Word'
 import ResetGameButton from './ResetGameButton'
 import PlayerList from './PlayerList'
 import { Player } from '../../types/Player'
-import TestSecRule from './TestSecRule'
-import { Grid } from '@material-ui/core'
+import SkipVotingButton from './SkipVotingButton'
+import { Grid, Typography } from '@material-ui/core'
 import { WordOwner } from '../../types/WordOwner'
 import { Hint } from '../../types/Hint'
-import HintList from './HintList'
 import StartGameButton from './StartGameButton'
 
 const CodeguideGame: FC = () => {
@@ -51,6 +50,13 @@ const CodeguideGame: FC = () => {
         subcollections: [{ collection: 'hints' }],
         storeAs: 'hints',
     })
+
+    useFirestoreConnect({
+        collection: 'lobbies',
+        doc: 'GeyDTo9SUstY3JhlofJj',
+        storeAs: 'lobby',
+    })
+
     const hints: Hint[] = useSelector(
         (state: State) => state.firestore.ordered.hints
     )
@@ -61,16 +67,22 @@ const CodeguideGame: FC = () => {
                 <PlayerList players={players} team={'blue'} />
                 <CodeguideBoard words={words} />
                 <PlayerList players={players} team={'red'} />
-                <ResetGameButton
-                    hints={hints}
-                    words={words}
-                    players={players}
-                    wordOwners={wordOwners}
-                />
-                <StartGameButton />
-                <TestSecRule />
+                <Grid container spacing={2}>
+                    <Grid item xs={12}>
+                        <StartGameButton />
+                    </Grid>
+                    <Grid item xs={12}>
+                        <Typography>Host-Buttons:</Typography>
+                        <ResetGameButton
+                            hints={hints}
+                            words={words}
+                            players={players}
+                            wordOwners={wordOwners}
+                        />
+                        <SkipVotingButton />
+                    </Grid>
+                </Grid>
             </Grid>
-            <HintList hints={hints} />
         </>
     )
 }

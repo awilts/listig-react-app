@@ -6,6 +6,10 @@ import { makeStyles } from '@material-ui/core/styles'
 import { Button } from '@material-ui/core'
 import { useFirebase } from 'react-redux-firebase'
 import { functions } from 'firebase'
+import HintList from './HintList'
+import { Hint } from '../../types/Hint'
+import { useSelector } from 'react-redux'
+import { State } from '../../store/state'
 
 type Props = {
     players: Player[]
@@ -21,6 +25,10 @@ const useStyles = makeStyles({
 
 const PlayerList: FC<Props> = (props) => {
     const players = props.players
+
+    const hints: Hint[] = useSelector(
+        (state: State) => state.firestore.ordered.hints
+    )
 
     const classes = useStyles()
     const PlayerList =
@@ -52,11 +60,13 @@ const PlayerList: FC<Props> = (props) => {
         <Grid item xs={2}>
             <div className={classes.root}>
                 <Grid container spacing={1}>
+                    <h3>Team {props.team}</h3>
                     {PlayerList}
                 </Grid>
                 <Button onClick={joinTeam} variant="contained" color="primary">
                     Join Team
                 </Button>
+                <HintList hints={hints} team={props.team} />
             </div>
         </Grid>
     )

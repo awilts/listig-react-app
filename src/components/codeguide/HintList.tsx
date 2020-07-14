@@ -5,18 +5,21 @@ import HintCard from './HintCard'
 
 type Props = {
     hints: Hint[]
+    team: string
 }
 
 const HintList: FC<Props> = (props) => {
     const hints = props.hints
 
     const Hints =
-        hints && hints.map((hint) => <HintCard hint={hint} key={hint.id} />)
+        hints &&
+        hints
+            .filter((hint) => hint.team === props.team)
+            .map((hint) => <HintCard hint={hint} key={hint.id} />)
     return (
-        <Grid item xs={2}>
-            <Grid container spacing={1}>
-                {Hints}
-            </Grid>
+        <Grid container spacing={1}>
+            <h3>Hints</h3>
+            {Hints}
         </Grid>
     )
 }

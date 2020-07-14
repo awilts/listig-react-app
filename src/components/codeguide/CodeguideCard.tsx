@@ -60,7 +60,7 @@ const CodeguideCard: FC<Props> = (props) => {
     const word = props.word
 
     const playersOnThisCard = players.filter(
-        (player) => player.vote === word.boardId
+        (player) => player.vote === word.id
     )
 
     const color = word.team

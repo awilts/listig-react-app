@@ -1,5 +1,5 @@
 export enum CardColor {
-    unknown = 'UNKNOWN',
-    red = 'RED',
-    blue = 'BLUE',
+    unknown = 'unknown',
+    red = 'red',
+    blue = 'blue',
 }

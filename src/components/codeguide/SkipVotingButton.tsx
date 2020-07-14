@@ -6,7 +6,7 @@ import { Lobby } from '../../types/Lobby'
 import { useSelector } from 'react-redux'
 import { State } from '../../store/state'
 
-const StartGameButton: FC = () => {
+const SkipVotingButton: FC = () => {
     const firebase = useFirebase()
 
     const lobby: Lobby = useSelector(
@@ -14,17 +14,12 @@ const StartGameButton: FC = () => {
         (state: State) => state.firestore.ordered.lobby[0]
     )
 
-    let showButton = true
-    if (lobby && lobby.currentTeam) {
-        showButton = false
-    }
-
-    const startGame = async () => {
-        const startGameFunction = firebase
+    const forceAdvanceGame = async () => {
+        const forceAdvanceGameFunction = firebase
             // @ts-ignore
             .functions()
-            .httpsCallable('startGame')
-        startGameFunction({ lobbyId: 'GeyDTo9SUstY3JhlofJj' }).then(function (
+            .httpsCallable('forceAdvanceGame')
+        forceAdvanceGameFunction({ lobbyId: lobby.id }).then(function (
             result: functions.HttpsCallableResult
         ) {
             const sanitizedMessage = result.data
@@ -32,14 +27,11 @@ const StartGameButton: FC = () => {
         })
     }
 
-    if (!showButton) {
-        return <></>
-    }
     return (
-        <Button onClick={startGame} variant="contained" color="primary">
-            start game
+        <Button onClick={forceAdvanceGame} variant="contained" color="primary">
+            Skip Voting
         </Button>
     )
 }
 
-export default StartGameButton
+export default SkipVotingButton
