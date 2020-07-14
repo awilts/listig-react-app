@@ -46,7 +46,7 @@ const ResetGameButton: FC<Props> = (props) => {
         })
         addPlayer({
             vote: '',
-            name: 'Bernd Braun',
+            name: 'Bernd Brot',
             color: 'brown',
             team: 'red',
         })
@@ -191,13 +191,6 @@ const ResetGameButton: FC<Props> = (props) => {
         })
     }
 
-    function resetCurrentTeam() {
-        firestore
-            .collection('lobbies')
-            .doc('GeyDTo9SUstY3JhlofJj')
-            .update({ currentTeam: 'blue' })
-    }
-
     const resetGame = () => {
         console.log('resetting game')
         const propsCopy = JSON.parse(JSON.stringify(props))
@@ -205,7 +198,21 @@ const ResetGameButton: FC<Props> = (props) => {
         resetPlayers(propsCopy.players)
         resetHints(propsCopy.hints)
         resetWords(propsCopy.words)
-        resetCurrentTeam()
+
+        const host: Player = {
+            team: 'blue',
+            vote: '',
+            name: 'Alexander Wilts',
+            color: 'grey',
+            host: 'true',
+            guide: 'true',
+        }
+        firestore
+            .collection('lobbies')
+            .doc('GeyDTo9SUstY3JhlofJj')
+            .collection('players')
+            .doc('WF3gYaNnwiNxQmvZrvLmbXDWJe13')
+            .set(host)
     }
 
     return (
