@@ -3,15 +3,15 @@ import { Button } from '@material-ui/core'
 import { useFirebase } from 'react-redux-firebase'
 import { functions } from 'firebase'
 
-const TestSecRule: FC = () => {
+const StartGameButton: FC = () => {
     const firebase = useFirebase()
 
-    const doSth = async () => {
-        const someWebFunction = firebase
+    const startGame = async () => {
+        const startGameFunction = firebase
             // @ts-ignore
             .functions()
-            .httpsCallable('voteForCard')
-        someWebFunction({ text: 'mytext' }).then(function (
+            .httpsCallable('startGame')
+        startGameFunction({ lobbyId: 'GeyDTo9SUstY3JhlofJj' }).then(function (
             result: functions.HttpsCallableResult
         ) {
             const sanitizedMessage = result.data
@@ -20,10 +20,10 @@ const TestSecRule: FC = () => {
     }
 
     return (
-        <Button onClick={doSth} variant="contained" color="primary">
-            test stuff
+        <Button onClick={startGame} variant="contained" color="primary">
+            start game
         </Button>
     )
 }
 
-export default TestSecRule
+export default StartGameButton

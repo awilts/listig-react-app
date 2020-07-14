@@ -12,6 +12,7 @@ import { Grid } from '@material-ui/core'
 import { WordOwner } from '../../types/WordOwner'
 import { Hint } from '../../types/Hint'
 import HintList from './HintList'
+import StartGameButton from './StartGameButton'
 
 const CodeguideGame: FC = () => {
     useFirestoreConnect({
@@ -66,6 +67,7 @@ const CodeguideGame: FC = () => {
                     players={players}
                     wordOwners={wordOwners}
                 />
+                <StartGameButton />
                 <TestSecRule />
             </Grid>
             <HintList hints={hints} />

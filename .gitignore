@@ -24,3 +24,4 @@ yarn-error.log*
 /listig-react-app.iml
 /config.json
 /src/devlocal.js
+.idea
