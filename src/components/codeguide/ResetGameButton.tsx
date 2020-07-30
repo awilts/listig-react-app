@@ -191,6 +191,13 @@ const ResetGameButton: FC<Props> = (props) => {
         })
     }
 
+    function resetCurrentTeam() {
+        firestore
+            .collection('lobbies')
+            .doc('GeyDTo9SUstY3JhlofJj')
+            .update({ currentTeam: '' })
+    }
+
     const resetGame = () => {
         console.log('resetting game')
         const propsCopy = JSON.parse(JSON.stringify(props))
@@ -198,6 +205,7 @@ const ResetGameButton: FC<Props> = (props) => {
         resetPlayers(propsCopy.players)
         resetHints(propsCopy.hints)
         resetWords(propsCopy.words)
+        resetCurrentTeam()
 
         const host: Player = {
             team: 'blue',
